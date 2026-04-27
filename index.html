@@ -2097,8 +2097,10 @@
 
     @media (min-width: 1025px) {
       .hero.home-slide .hero-inner {
-        padding: clamp(58px, 5.8vh, 68px) 0 clamp(14px, 1.6vh, 20px);
+        min-height: calc(100dvh - clamp(32px, 4vh, 48px));
+        padding: clamp(96px, 8.6vh, 118px) 0 clamp(26px, 3vh, 36px);
         gap: clamp(16px, 1.5vw, 20px);
+        align-content: center;
         align-items: start;
       }
 
@@ -2114,7 +2116,7 @@
       }
 
       .home-story-column {
-        gap: clamp(24px, 2vw, 30px);
+        gap: clamp(18px, 1.6vw, 24px);
       }
 
       .home-story-column .story-panel:last-child {

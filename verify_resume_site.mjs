@@ -599,8 +599,8 @@ assert.match(
 
 assert.match(
   html,
-  /@media \(min-width: 1025px\)\s*\{[\s\S]*\.hero\.home-slide \.hero-inner\s*\{[\s\S]*align-items:\s*start;/,
-  "桌面端首页仍在强制拉伸模块高度"
+  /@media \(min-width: 1025px\)\s*\{[\s\S]*\.hero\.home-slide \.hero-inner\s*\{[\s\S]*min-height:\s*calc\(100dvh - clamp\(32px, 4vh, 48px\)\);[\s\S]*padding:\s*clamp\(96px, 8\.6vh, 118px\) 0 clamp\(26px, 3vh, 36px\);[\s\S]*align-content:\s*center;[\s\S]*align-items:\s*start;/,
+  "桌面端首页首屏内容未下移并重新平衡上下留白"
 );
 
 assert.match(
@@ -623,8 +623,8 @@ assert.match(
 
 assert.match(
   html,
-  /@media \(min-width: 1025px\)\s*\{[\s\S]*\.home-story-column \.story-panel:last-child\s*\{[\s\S]*flex:\s*initial;/,
-  "桌面端首页右侧卡片仍在被强制拉伸"
+  /@media \(min-width: 1025px\)\s*\{[\s\S]*\.home-story-column\s*\{[\s\S]*gap:\s*clamp\(18px, 1\.6vw, 24px\);[\s\S]*\.home-story-column \.story-panel:last-child\s*\{[\s\S]*flex:\s*initial;/,
+  "桌面端首页右侧卡片间距或拉伸策略未按首屏位置优化"
 );
 
 assert.match(
