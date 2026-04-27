@@ -701,19 +701,19 @@ assert.match(
 
 assert.match(
   html,
-  /experienceCarousel\.addEventListener\("scroll", \(\) => \{[\s\S]*updateExperienceCarousel\(\);[\s\S]*queuePagedCarouselSettle\(experienceCarousel\);[\s\S]*\}, \{ passive: true \}\);/,
+  /experienceCarousel\.addEventListener\("scroll", updateExperienceCarousel, \{ passive: true \}\);/,
   "缺少实习经历轮播滚动监听"
 );
 
 assert.match(
   html,
-  /projectsCarousel\.addEventListener\("scroll", \(\) => \{[\s\S]*updateProjectsCarousel\(\);[\s\S]*queuePagedCarouselSettle\(projectsCarousel\);[\s\S]*\}, \{ passive: true \}\);/,
+  /projectsCarousel\.addEventListener\("scroll", updateProjectsCarousel, \{ passive: true \}\);/,
   "缺少项目经历轮播滚动监听"
 );
 
 assert.match(
   html,
-  /lifeCarousel\.addEventListener\("scroll", \(\) => \{[\s\S]*updateLifeCarousel\(\);[\s\S]*queuePagedCarouselSettle\(lifeCarousel\);[\s\S]*\}, \{ passive: true \}\);/,
+  /lifeCarousel\.addEventListener\("scroll", updateLifeCarousel, \{ passive: true \}\);/,
   "缺少生活与爱好轮播滚动监听"
 );
 
@@ -817,6 +817,12 @@ assert.match(
   html,
   /\.projects-carousel-track\s*\{[\s\S]*scroll-snap-type:\s*x mandatory;/,
   "项目经历轮播未启用横向吸附滚动"
+);
+
+assert.match(
+  html,
+  /\.projects-slide,\s*[\s\S]*\.life-slide,\s*[\s\S]*\.experience-slide\s*\{[\s\S]*scroll-snap-align:\s*start;[\s\S]*scroll-snap-stop:\s*always;/,
+  "分页轮播缺少逐页停靠限制"
 );
 
 assert.match(
@@ -1101,26 +1107,8 @@ assert.match(
 
 assert.match(
   html,
-  /function markPagedCarouselProgrammaticScroll\(carousel\)/,
-  "缺少分页轮播程序化滚动保护逻辑"
-);
-
-assert.match(
-  html,
-  /function queuePagedCarouselSettle\(carousel\)/,
-  "缺少触摸板原生横滑后的自动吸附切页逻辑"
-);
-
-assert.match(
-  html,
   /homeScrollContainer\.addEventListener\("wheel", handleWheel, \{ passive: false \}\);/,
   "缺少滚轮事件绑定"
-);
-
-assert.match(
-  html,
-  /window\.addEventListener\("wheel", handleWheel, \{ passive: false \}\);/,
-  "缺少全局滚轮兜底监听"
 );
 
 assert.match(
@@ -1154,13 +1142,23 @@ assert.match(
 
 assert.match(
   html,
-  /state\.accumulatedDeltaX \+= deltaX;[\s\S]*state\.accumulatedDeltaY \+= deltaY;[\s\S]*verticalMagnitude > horizontalMagnitude \* 1\.4[\s\S]*horizontalMagnitude < pagedCarouselSwipeThreshold[\s\S]*horizontalMagnitude <= verticalMagnitude \* 0\.85/,
-  "缺少按整段手势累计判断横向切页方向的逻辑"
+  /state\.accumulatedDeltaX \+= deltaX;[\s\S]*state\.accumulatedDeltaY \+= deltaY;[\s\S]*verticalMagnitude > horizontalMagnitude \* 1\.4[\s\S]*state\.hasTriggered \|\| horizontalMagnitude < pagedCarouselSwipeThreshold[\s\S]*state\.hasTriggered = true;/,
+  "缺少单次手势只切换一页的横向轮播锁定逻辑"
 );
 
 assert.ok(
   !/horizontalCarousel\.scrollLeft \+=/.test(html),
   "分页轮播仍在使用旧的连续横向位移逻辑"
+);
+
+assert.ok(
+  !/queuePagedCarouselSettle\(/.test(html),
+  "分页轮播仍保留额外的滚动结束吸附逻辑"
+);
+
+assert.ok(
+  !/markPagedCarouselProgrammaticScroll\(/.test(html),
+  "分页轮播仍保留程序化滚动保护逻辑"
 );
 
 assert.ok(
