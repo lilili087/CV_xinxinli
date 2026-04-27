@@ -3299,6 +3299,11 @@
     const photoGalleryButtons = Array.from(document.querySelectorAll("[data-photo-gallery]"));
     const rootStyle = document.documentElement.style;
     const heroGradient = "linear-gradient(180deg, rgba(249, 250, 244, 0.50), rgba(249, 250, 244, 0.64) 34%, rgba(239, 243, 236, 0.78) 76%, rgba(244, 246, 241, 0.92) 100%)";
+    const pagedCarouselGestureState = new WeakMap();
+    const pagedCarouselSwipeThreshold = 20;
+    const pagedCarouselGestureResetMs = 260;
+    const pagedCarouselSettleMs = 140;
+    const pagedCarouselProgrammaticCooldownMs = 460;
 
     function createHeroPlaceholder() {
       const svg = `
@@ -3448,6 +3453,191 @@
       return false;
     }
 
+    function getPagedCarouselController(carousel) {
+      if (carousel === experienceCarousel) {
+        return {
+          getIndex: getExperienceSlideIndex,
+          scrollToIndex: scrollToExperienceSlide,
+          slideCount: experienceSlides.length
+        };
+      }
+
+      if (carousel === projectsCarousel) {
+        return {
+          getIndex: getProjectSlideIndex,
+          scrollToIndex: scrollToProjectSlide,
+          slideCount: projectSlides.length
+        };
+      }
+
+      if (carousel === lifeCarousel) {
+        return {
+          getIndex: getLifeSlideIndex,
+          scrollToIndex: scrollToLifeSlide,
+          slideCount: lifeSlides.length
+        };
+      }
+
+      return null;
+    }
+
+    function getPagedCarouselFromTarget(target) {
+      const directCarousel = target.closest(".projects-carousel-track");
+
+      if (directCarousel) {
+        return directCarousel;
+      }
+
+      const shell = target.closest(".projects-carousel-shell");
+      return shell ? shell.querySelector(".projects-carousel-track") : null;
+    }
+
+    function getPagedCarouselState(carousel) {
+      const existingState = pagedCarouselGestureState.get(carousel);
+
+      if (existingState) {
+        return existingState;
+      }
+
+      const nextState = {
+        accumulatedDeltaX: 0,
+        accumulatedDeltaY: 0,
+        isLocked: false,
+        releaseTimer: null,
+        settleTimer: null,
+        gestureStartLeft: null,
+        gestureStartIndex: null,
+        ignoreScrollUntil: 0
+      };
+
+      pagedCarouselGestureState.set(carousel, nextState);
+      return nextState;
+    }
+
+    function markPagedCarouselProgrammaticScroll(carousel) {
+      const state = getPagedCarouselState(carousel);
+      state.ignoreScrollUntil = Date.now() + pagedCarouselProgrammaticCooldownMs;
+      state.gestureStartLeft = null;
+      state.gestureStartIndex = null;
+
+      if (state.settleTimer) {
+        window.clearTimeout(state.settleTimer);
+        state.settleTimer = null;
+      }
+    }
+
+    function queuePagedCarouselSettle(carousel) {
+      const controller = getPagedCarouselController(carousel);
+
+      if (!controller || controller.slideCount <= 1) {
+        return;
+      }
+
+      const state = getPagedCarouselState(carousel);
+
+      if (Date.now() < state.ignoreScrollUntil) {
+        return;
+      }
+
+      if (state.gestureStartLeft === null) {
+        state.gestureStartLeft = carousel.scrollLeft;
+        state.gestureStartIndex = controller.getIndex();
+      }
+
+      if (state.settleTimer) {
+        window.clearTimeout(state.settleTimer);
+      }
+
+      state.settleTimer = window.setTimeout(() => {
+        state.settleTimer = null;
+
+        if (Date.now() < state.ignoreScrollUntil) {
+          state.gestureStartLeft = null;
+          state.gestureStartIndex = null;
+          return;
+        }
+
+        const startLeft = state.gestureStartLeft === null ? carousel.scrollLeft : state.gestureStartLeft;
+        const startIndex = state.gestureStartIndex === null ? controller.getIndex() : state.gestureStartIndex;
+        const delta = carousel.scrollLeft - startLeft;
+        const direction = delta > 0 ? 1 : -1;
+        const targetIndex = Math.max(0, Math.min(controller.slideCount - 1, startIndex + direction));
+
+        state.gestureStartLeft = null;
+        state.gestureStartIndex = null;
+
+        if (Math.abs(delta) < 18) {
+          return;
+        }
+
+        if (targetIndex === controller.getIndex()) {
+          markPagedCarouselProgrammaticScroll(carousel);
+          controller.scrollToIndex(controller.getIndex());
+          return;
+        }
+
+        markPagedCarouselProgrammaticScroll(carousel);
+        controller.scrollToIndex(targetIndex);
+      }, pagedCarouselSettleMs);
+    }
+
+    function queuePagedCarouselSwipe(carousel, deltaX, deltaY) {
+      const controller = getPagedCarouselController(carousel);
+
+      if (!controller || controller.slideCount <= 1) {
+        return;
+      }
+
+      const state = getPagedCarouselState(carousel);
+
+      state.accumulatedDeltaX += deltaX;
+      state.accumulatedDeltaY += deltaY;
+
+      if (state.releaseTimer) {
+        window.clearTimeout(state.releaseTimer);
+      }
+
+      state.releaseTimer = window.setTimeout(() => {
+        state.accumulatedDeltaX = 0;
+        state.accumulatedDeltaY = 0;
+        state.isLocked = false;
+        state.releaseTimer = null;
+      }, pagedCarouselGestureResetMs);
+
+      const horizontalMagnitude = Math.abs(state.accumulatedDeltaX);
+      const verticalMagnitude = Math.abs(state.accumulatedDeltaY);
+
+      if (verticalMagnitude > horizontalMagnitude * 1.4 && verticalMagnitude > pagedCarouselSwipeThreshold) {
+        state.accumulatedDeltaX = 0;
+        state.accumulatedDeltaY = 0;
+        pagedCarouselGestureState.set(carousel, state);
+        return;
+      }
+
+      if (state.isLocked || horizontalMagnitude < pagedCarouselSwipeThreshold || horizontalMagnitude <= verticalMagnitude * 0.85) {
+        pagedCarouselGestureState.set(carousel, state);
+        return;
+      }
+
+      const direction = state.accumulatedDeltaX > 0 ? 1 : -1;
+      const currentIndex = controller.getIndex();
+      const targetIndex = Math.max(0, Math.min(controller.slideCount - 1, currentIndex + direction));
+
+      if (targetIndex === currentIndex) {
+        state.accumulatedDeltaX = 0;
+        state.accumulatedDeltaY = 0;
+        pagedCarouselGestureState.set(carousel, state);
+        return;
+      }
+
+      state.accumulatedDeltaX = 0;
+      state.accumulatedDeltaY = 0;
+      state.isLocked = true;
+      pagedCarouselGestureState.set(carousel, state);
+
+      controller.scrollToIndex(targetIndex);
+    }
+
     function getExperienceSlideIndex() {
       if (!experienceCarousel || !experienceSlides.length || !experienceCarousel.clientWidth) {
         return 0;
@@ -3462,6 +3652,7 @@
       }
 
       const clampedIndex = Math.max(0, Math.min(experienceSlides.length - 1, index));
+      markPagedCarouselProgrammaticScroll(experienceCarousel);
       experienceCarousel.scrollTo({
         left: experienceSlides[clampedIndex].offsetLeft,
         behavior: "smooth"
@@ -3513,7 +3704,10 @@
         });
       });
 
-      experienceCarousel.addEventListener("scroll", updateExperienceCarousel, { passive: true });
+      experienceCarousel.addEventListener("scroll", () => {
+        updateExperienceCarousel();
+        queuePagedCarouselSettle(experienceCarousel);
+      }, { passive: true });
       updateExperienceCarousel();
     }
 
@@ -3531,6 +3725,7 @@
       }
 
       const clampedIndex = Math.max(0, Math.min(projectSlides.length - 1, index));
+      markPagedCarouselProgrammaticScroll(projectsCarousel);
       projectsCarousel.scrollTo({
         left: projectSlides[clampedIndex].offsetLeft,
         behavior: "smooth"
@@ -3582,7 +3777,10 @@
         });
       });
 
-      projectsCarousel.addEventListener("scroll", updateProjectsCarousel, { passive: true });
+      projectsCarousel.addEventListener("scroll", () => {
+        updateProjectsCarousel();
+        queuePagedCarouselSettle(projectsCarousel);
+      }, { passive: true });
       updateProjectsCarousel();
     }
 
@@ -3600,6 +3798,7 @@
       }
 
       const clampedIndex = Math.max(0, Math.min(lifeSlides.length - 1, index));
+      markPagedCarouselProgrammaticScroll(lifeCarousel);
       lifeCarousel.scrollTo({
         left: lifeSlides[clampedIndex].offsetLeft,
         behavior: "smooth"
@@ -3651,7 +3850,10 @@
         });
       });
 
-      lifeCarousel.addEventListener("scroll", updateLifeCarousel, { passive: true });
+      lifeCarousel.addEventListener("scroll", () => {
+        updateLifeCarousel();
+        queuePagedCarouselSettle(lifeCarousel);
+      }, { passive: true });
       updateLifeCarousel();
     }
 
@@ -3680,23 +3882,38 @@
     }
 
     function handleWheel(event) {
-      if (event.ctrlKey) {
+      if (event.defaultPrevented || event.ctrlKey) {
         return;
       }
 
-      const horizontalCarousel = event.target.closest(".projects-carousel-track, .travel-timeline-horizontal");
-      const horizontalIntent = Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey;
-      const horizontalDelta = event.deltaX || (event.shiftKey ? event.deltaY : 0);
+      const horizontalDelta = normalizeWheelDelta(event.deltaX, event.deltaMode);
+      const verticalDelta = normalizeWheelDelta(event.deltaY, event.deltaMode);
+      const horizontalMagnitude = Math.abs(horizontalDelta);
+      const verticalMagnitude = Math.abs(verticalDelta);
+      const hasHorizontalSignal = horizontalMagnitude >= 0.5;
+      const horizontalIntent = hasHorizontalSignal && (verticalMagnitude <= 2 || horizontalMagnitude > verticalMagnitude * 0.35);
+      const travelTimeline = event.target.closest(".travel-timeline-horizontal");
 
-      if (horizontalCarousel && horizontalIntent && horizontalDelta && canScrollHorizontally(horizontalCarousel, horizontalDelta)) {
+      if (travelTimeline && horizontalIntent && horizontalDelta) {
+        if (canScrollHorizontally(travelTimeline, horizontalDelta)) {
+          event.preventDefault();
+          travelTimeline.scrollLeft += horizontalDelta;
+        }
+
+        return;
+      }
+
+      const pagedCarousel = getPagedCarouselFromTarget(event.target);
+
+      if (pagedCarousel && horizontalIntent && horizontalDelta) {
         event.preventDefault();
-        horizontalCarousel.scrollLeft += normalizeWheelDelta(horizontalDelta, event.deltaMode);
+        queuePagedCarouselSwipe(pagedCarousel, horizontalDelta, verticalDelta);
         return;
       }
 
       const scrollableAncestor = event.target.closest(".section-scroll-body, .home-scroll-body");
 
-      if (scrollableAncestor && canScrollVertically(scrollableAncestor, event.deltaY)) {
+      if (scrollableAncestor && canScrollVertically(scrollableAncestor, verticalDelta)) {
         return;
       }
     }
@@ -3801,6 +4018,7 @@
     }
 
     homeScrollContainer.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("wheel", handleWheel, { passive: false });
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll);
     window.addEventListener("resize", updateExperienceCarousel);
