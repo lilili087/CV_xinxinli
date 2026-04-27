@@ -20,7 +20,6 @@ const requiredSnippets = [
   "项目经历",
   "校园经历",
   "生活与爱好",
-  "学生工作",
   "我的支教生活",
   "摄影日常",
   "我的溜达日记",
@@ -28,6 +27,9 @@ const requiredSnippets = [
   "百度 - 大模型产品部",
   "小冰跃动科技有限公司（前微软小冰）",
   "南湖研究院",
+  "2025.11 - 2026.03",
+  "2025.07 - 2025.11",
+  "2025.03 - 2025.07",
   "理性产品人",
   "有温度的推动者",
   "相比“做功能”，我更关注如何让技术真正被人理解、被人使用。",
@@ -57,8 +59,10 @@ const requiredSnippets = [
   "团委新媒体中心｜副主任",
   "初雪推送",
   "一周 CP",
-  "支教生活1.jpg",
-  "摄影作品1.jpg",
+  "支教视频1.mp4",
+  "支教视频2.mp4",
+  "摄影作品1.1.jpg",
+  "摄影作品4.3.jpg",
   "coze图片生成.png",
   "coze视频生成.png",
   "洛阳.jpg",
@@ -70,9 +74,16 @@ const requiredSnippets = [
   "重庆",
   "What I Learned：",
   "把人和事情连接起来",
+  "Graph / DAG 并行执行",
+  "未登录可用 AI 语音",
+  "10+ 项能力优化",
+  "屏幕圈画指引",
+  "V0 仿真手动控制",
+  "主要参与小高老师——高德AI智能助手的能力优化项目",
+  "在百度，主要参与文心一言web端超级智能体Xgent的0-1产品设计，包括能力设计、评估、用户体验优化",
+  "产品设计、评估体系搭建、工具链路优化、用户体验优化经验",
   "贵州省长顺县罗湖希望小学",
-  "西部计划大学生支教团成员",
-  "支教日常 01",
+  "支教视频 03",
   "摄影记录 04",
   "摄影",
   "旅行",
@@ -189,8 +200,28 @@ assert.ok(
 );
 
 assert.ok(
+  !html.includes("学生工作"),
+  "校园经历模块仍保留学生工作文案"
+);
+
+assert.ok(
   !html.includes("支教 / 摄影 / 旅行"),
   "生活与爱好模块仍保留右上角标签"
+);
+
+assert.ok(
+  !html.includes("贵州省长顺县罗湖希望小学｜西部计划大学生支教团成员。"),
+  "我的支教生活顶部说明仍保留旧文案"
+);
+
+assert.ok(
+  !html.includes("把去过的城市整理成一条会继续延长的路线，也预留照片位置记录每次出发时的天气和心情。"),
+  "我的溜达日记顶部说明仍未移除"
+);
+
+assert.ok(
+  !html.includes("支教、摄影和旅行，是我离真实生活最近的三个入口。它们让我一直保留对人、情绪与现场的感受力，也让我在做产品时更在意“具体的人”，而不只是抽象需求。"),
+  "生活与爱好导语仍保留旧版长文案"
 );
 
 assert.ok(
@@ -283,15 +314,27 @@ assert.ok(
 );
 
 assert.equal(
-  (html.match(/class="media-slot support-photo-slot(?: has-image)?"/g) || []).length,
+  (html.match(/class="media-slot support-video-slot(?: has-video)?"/g) || []).length,
   3,
-  "支教图片区占位数量不正确"
+  "支教视频槽数量不正确"
 );
 
 assert.equal(
-  (html.match(/class="media-slot photography-photo-slot(?: has-image)?"/g) || []).length,
+  (html.match(/<video class="slot-video"/g) || []).length,
+  2,
+  "支教已接入的视频数量不正确"
+);
+
+assert.equal(
+  (html.match(/class="photo-stack-card"/g) || []).length,
   4,
-  "摄影图片区占位数量不正确"
+  "摄影折叠卡片数量不正确"
+);
+
+assert.equal(
+  (html.match(/class="photo-stack-layer"/g) || []).length,
+  12,
+  "摄影折叠图片层数量不正确"
 );
 
 assert.equal(
@@ -335,6 +378,16 @@ assert.ok(
 assert.ok(
   !html.includes("10 个地点"),
   "生活与爱好仍保留旅行摘要"
+);
+
+assert.ok(
+  !html.includes("支教生活1.jpg"),
+  "我的支教生活仍在使用旧图片素材"
+);
+
+assert.ok(
+  !html.includes("摄影作品1.jpg"),
+  "我的摄影日常仍在使用旧单图素材"
 );
 
 assert.ok(
@@ -430,14 +483,20 @@ assert.match(
 
 assert.match(
   html,
-  /--max-width:\s*1360px;/,
-  "内容区最大宽度未放大"
+  /--max-width:\s*1280px;[\s\S]*--page-gutter:\s*clamp\(24px, 3vw, 40px\);[\s\S]*--shell-width:\s*min\(var\(--max-width\), calc\(100vw - \(var\(--page-gutter\) \* 2\)\)\);/,
+  "全局内容宽度与桌面端横向留白未统一到新的 spacing 体系"
 );
 
 assert.match(
   html,
   /\.section-card\s*\{[\s\S]*background:\s*rgba\(249, 249, 244, 0\.68\);[\s\S]*backdrop-filter:\s*blur\(20px\);/,
   "模块外层卡片未同步为新的浅米白阅读面板"
+);
+
+assert.match(
+  html,
+  /--section-pad-top:\s*clamp\(48px, 5vw, 60px\);[\s\S]*--section-pad-bottom:\s*clamp\(6px, 1\.2vw, 12px\);[\s\S]*--panel-padding:\s*clamp\(20px, 2vw, 26px\);[\s\S]*--card-padding:\s*clamp\(20px, 1\.8vw, 24px\);[\s\S]*--stack-gap:\s*clamp\(24px, 2\.2vw, 30px\);[\s\S]*--grid-gap:\s*clamp\(24px, 2vw, 28px\);/,
+  "缺少统一的 section / panel / card spacing 变量"
 );
 
 assert.match(
@@ -718,8 +777,14 @@ assert.match(
 
 assert.match(
   html,
-  /\.media-slot-grid--photo\s*\{[\s\S]*grid-template-columns:\s*repeat\(4, minmax\(0, 1fr\)\);/,
-  "摄影图片区未改为四图横向排列"
+  /\.photo-stack-grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\);[\s\S]*\.photo-stack-layer:nth-child\(1\)\s*\{[\s\S]*--stack-rotate:\s*-11deg;[\s\S]*\.photo-stack-card:hover \.photo-stack-layer:nth-child\(3\)\s*\{[\s\S]*rotate\(11deg\);/,
+  "摄影模块未切换为 stack 式折叠展示"
+);
+
+assert.match(
+  html,
+  /\.support-video-slot\s*\{[\s\S]*aspect-ratio:\s*4 \/ 5;[\s\S]*\.media-slot\.has-video\s*\{[\s\S]*border-style:\s*solid;[\s\S]*\.slot-video\s*\{[\s\S]*object-fit:\s*cover;/,
+  "支教模块未切换为视频展示槽"
 );
 
 assert.match(
@@ -732,6 +797,43 @@ assert.match(
   html,
   /\.experience-carousel-shell \.exp-card\s*\{[\s\S]*background:\s*rgba\(249, 249, 244, 0\.58\);[\s\S]*backdrop-filter:\s*blur\(18px\);/,
   "实习经历轮播卡片未切换到新的横向展示样式"
+);
+
+assert.equal(
+  (html.match(/class="experience-focus-card"/g) || []).length,
+  12,
+  "实习经历重点模块卡片数量不正确"
+);
+
+assert.match(
+  html,
+  /\.experience-overview\s*\{[\s\S]*gap:\s*10px;[\s\S]*\.experience-focus-grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\);/,
+  "实习经历未切换为摘要 + 重点模块的融合展示"
+);
+
+assert.ok(
+  !html.includes('class="experience-kpi-grid"'),
+  "实习经历仍保留独立的指标卡区块"
+);
+
+assert.ok(
+  !html.includes('class="experience-kpi"'),
+  "实习经历仍保留旧的成果指标卡"
+);
+
+assert.ok(
+  !html.includes("在高德，我围绕 AI 搜索同时推进评测闭环、Agent 架构升级和增长需求落地，把系统能力提升、问题修复效率和 DAU 目标放在同一条产品链路上推进。"),
+  "高德实习摘要仍保留旧版文案"
+);
+
+assert.ok(
+  !html.includes("在百度，我围绕超级智能体 Xgent 的 0-1 能力规划、长链路体验优化和 Benchmark 体系搭建，持续把“能力可做”转成“任务可交付”。"),
+  "百度实习摘要仍保留旧版文案"
+);
+
+assert.ok(
+  !html.includes("我的实习经历覆盖 AI 搜索、超级智能体、桌面助手与具身智能，重点沉淀了评测设计、架构升级、体验优化与跨团队推进能力。"),
+  "实习经历导语仍保留旧版文案"
 );
 
 assert.match(
@@ -796,6 +898,18 @@ assert.match(
 
 assert.match(
   html,
+  /\.projects-indicators\s*\{[\s\S]*display:\s*flex;[\s\S]*justify-content:\s*center;[\s\S]*gap:\s*12px;/,
+  "轮播指示器容器样式不正确"
+);
+
+assert.match(
+  html,
+  /\.projects-indicator\.active\s*\{[\s\S]*width:\s*30px;[\s\S]*background:\s*var\(--accent-blue\);/,
+  "轮播激活态未恢复为简洁状态条样式"
+);
+
+assert.match(
+  html,
   /\.home-profile-panel\s*\{[\s\S]*background:\s*transparent;[\s\S]*border:\s*0;[\s\S]*box-shadow:\s*none;/,
   "首页左侧个人信息面板未改为透明样式"
 );
@@ -837,8 +951,14 @@ assert.match(
 
 assert.match(
   html,
-  /\.content-section\.home-slide \.section-card\s*\{[\s\S]*width:\s*min\(var\(--max-width\), calc\(100vw - clamp\(20px, 2\.4vw, 32px\)\)\);[\s\S]*height:\s*auto;[\s\S]*max-height:\s*none;[\s\S]*overflow:\s*visible;/,
-  "内容展示区文本框未切换为纵向页面所需的自然高度"
+  /\.content-section\.home-slide\s*\{[\s\S]*min-height:\s*auto;[\s\S]*padding:\s*var\(--section-pad-top\) var\(--page-gutter\) var\(--section-pad-bottom\);[\s\S]*\.content-section\.home-slide \.section-card\s*\{[\s\S]*width:\s*var\(--shell-width\);[\s\S]*height:\s*auto;[\s\S]*max-height:\s*none;[\s\S]*padding:\s*var\(--panel-padding\);[\s\S]*overflow:\s*visible;/,
+  "内容区外层 section 未收敛为同页连续排布所需的紧凑节奏"
+);
+
+assert.match(
+  html,
+  /\.content-stack\s*\{[\s\S]*gap:\s*var\(--stack-gap\);[\s\S]*\.info-grid,[\s\S]*\.campus-grid\s*\{[\s\S]*gap:\s*var\(--grid-gap\);[\s\S]*\.projects-showcase-grid\s*\{[\s\S]*gap:\s*var\(--grid-gap\);/,
+  "模块内部内容块和卡片网格间距未统一到新的 spacing 体系"
 );
 
 assert.match(
@@ -863,6 +983,12 @@ assert.match(
   html,
   /@media \(max-width: 1024px\)/,
   "缺少平板与窄窗口响应式断点"
+);
+
+assert.match(
+  html,
+  /@media \(max-width: 1024px\)\s*\{[\s\S]*:root\s*\{[\s\S]*--page-gutter:\s*clamp\(20px, 4vw, 28px\);[\s\S]*--section-pad-top:\s*clamp\(44px, 5\.5vw, 54px\);[\s\S]*--section-pad-bottom:\s*10px;[\s\S]*--panel-padding:\s*clamp\(20px, 2\.4vw, 24px\);[\s\S]*--grid-gap:\s*18px;[\s\S]*\.photo-stack-grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\);[\s\S]*\.experience-focus-grid\s*\{[\s\S]*grid-template-columns:\s*1fr;/,
+  "平板端 spacing 变量未收敛到更紧凑的范围"
 );
 
 assert.match(
@@ -916,6 +1042,24 @@ assert.match(
   html,
   /@media \(max-width: 760px\)/,
   "缺少移动端响应式样式"
+);
+
+assert.match(
+  html,
+  /@media \(max-width: 760px\)\s*\{[\s\S]*:root\s*\{[\s\S]*--page-gutter:\s*16px;[\s\S]*--section-pad-top:\s*38px;[\s\S]*--section-pad-bottom:\s*6px;[\s\S]*--panel-padding:\s*18px 16px;[\s\S]*--card-padding:\s*18px 16px;/,
+  "移动端左右留白未收敛到 16px 级别的 spacing 体系"
+);
+
+assert.match(
+  html,
+  /@media \(max-width: 760px\)\s*\{[\s\S]*\.photo-stack-grid\s*\{[\s\S]*grid-template-columns:\s*1fr;[\s\S]*\.support-video-slot\s*\{[\s\S]*min-height:\s*240px;/,
+  "移动端摄影 stack 或支教视频槽未同步收敛"
+);
+
+assert.match(
+  html,
+  /@media \(max-width: 760px\)\s*\{[\s\S]*\.content-section\.home-slide\s*\{[\s\S]*padding:\s*var\(--section-pad-top\) var\(--page-gutter\) var\(--section-pad-bottom\);[\s\S]*\.content-section\.home-slide \.section-card\s*\{[\s\S]*width:\s*var\(--shell-width\);/,
+  "移动端生活与爱好模块的 stack / 视频 / section spacing 未同步收敛"
 );
 
 assert.match(
