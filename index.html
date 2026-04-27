@@ -30,12 +30,12 @@
       --max-width: 1280px;
       --page-gutter: clamp(24px, 3vw, 40px);
       --shell-width: min(var(--max-width), calc(100vw - (var(--page-gutter) * 2)));
-      --section-pad-top: clamp(48px, 5vw, 60px);
-      --section-pad-bottom: clamp(6px, 1.2vw, 12px);
-      --panel-padding: clamp(20px, 2vw, 26px);
-      --card-padding: clamp(20px, 1.8vw, 24px);
-      --stack-gap: clamp(24px, 2.2vw, 30px);
-      --grid-gap: clamp(24px, 2vw, 28px);
+      --section-pad-top: clamp(24px, 2.8vw, 34px);
+      --section-pad-bottom: clamp(2px, 0.4vw, 6px);
+      --panel-padding: clamp(16px, 1.4vw, 20px);
+      --card-padding: clamp(14px, 1.2vw, 18px);
+      --stack-gap: clamp(14px, 1.4vw, 20px);
+      --grid-gap: clamp(14px, 1.4vw, 20px);
       --transition: 240ms cubic-bezier(0.22, 1, 0.36, 1);
       --hero-image: none;
       --hero-shift: 0px;
@@ -421,8 +421,8 @@
       position: relative;
       z-index: 1;
       max-width: var(--max-width);
-      margin: -8vh auto 0;
-      padding: 0 var(--page-gutter) 48px;
+      margin: -6vh auto 0;
+      padding: 0 var(--page-gutter) 32px;
     }
 
     .content-section {
@@ -431,9 +431,9 @@
     }
 
     .section-card {
-      margin-bottom: 28px;
+      margin-bottom: 22px;
       padding: var(--panel-padding);
-      border-radius: 38px;
+      border-radius: 34px;
       background: rgba(249, 249, 244, 0.68);
       border: 1px solid rgba(255, 255, 255, 0.92);
       box-shadow: 0 18px 52px rgba(70, 82, 76, 0.08);
@@ -445,15 +445,15 @@
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 20px;
-      padding-bottom: 14px;
+      gap: 14px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
       border-bottom: 1px solid var(--line);
     }
 
     .section-head h2 {
       font-family: var(--font-display);
-      font-size: clamp(2.2rem, 3.7vw, 3.26rem);
+      font-size: clamp(2rem, 3.3vw, 3rem);
       line-height: 1.08;
       letter-spacing: -0.05em;
       font-weight: 600;
@@ -503,27 +503,27 @@
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 12px;
-      padding-bottom: 12px;
+      gap: 10px;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
       border-bottom: 1px solid rgba(103, 118, 110, 0.12);
     }
 
     .card-title {
-      font-size: 1.12rem;
-      line-height: 1.68;
+      font-size: 1.07rem;
+      line-height: 1.6;
       font-weight: 700;
       letter-spacing: -0.02em;
     }
 
     .date-pill {
       flex-shrink: 0;
-      padding: 8px 12px;
+      padding: 8px 11px;
       border-radius: 999px;
       background: rgba(241, 245, 239, 0.92);
       border: 1px solid rgba(217, 226, 217, 0.90);
       color: #566a60;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 600;
       letter-spacing: 0.02em;
       white-space: nowrap;
@@ -531,17 +531,17 @@
 
     .card-text {
       color: var(--muted);
-      font-size: 0.99rem;
-      line-height: 1.86;
+      font-size: 0.96rem;
+      line-height: 1.78;
     }
 
     .detail-list {
       margin: 0;
       padding-left: 18px;
       color: var(--muted);
-      line-height: 1.86;
+      line-height: 1.78;
       display: grid;
-      gap: 10px;
+      gap: 9px;
     }
 
     .detail-list strong {
@@ -615,8 +615,8 @@
 
     .section-lead {
       color: var(--muted);
-      font-size: 1.02rem;
-      line-height: 1.92;
+      font-size: 0.98rem;
+      line-height: 1.82;
       max-width: 88ch;
     }
 
@@ -713,8 +713,65 @@
     .note-text {
       margin-top: 12px;
       color: #546a84;
-      font-size: 0.98rem;
-      line-height: 1.86;
+      font-size: 0.94rem;
+      line-height: 1.74;
+    }
+
+    .campus-intro-panel {
+      display: grid;
+      gap: 12px;
+      padding: 16px 18px;
+      border-radius: 24px;
+      background: rgba(255, 255, 252, 0.6);
+      border: 1px solid rgba(228, 234, 228, 0.82);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+    }
+
+    .campus-intro-note {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.76;
+    }
+
+    .campus-role-card {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .campus-case-note {
+      margin-top: 0;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(241, 246, 240, 0.84);
+      border: 1px solid rgba(213, 224, 214, 0.84);
+      color: #536963;
+    }
+
+    .campus-learned-box {
+      display: grid;
+      gap: 6px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(238, 245, 237, 0.96), rgba(251, 252, 248, 0.94));
+      border: 1px solid rgba(205, 218, 206, 0.86);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .campus-learned-label {
+      color: #60786d;
+      font-size: 0.74rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .campus-learned-text {
+      margin: 0;
+      color: #455750;
+      font-size: 0.92rem;
+      line-height: 1.7;
     }
 
     .life-layout {
@@ -726,12 +783,12 @@
 
     .life-card {
       display: grid;
-      gap: 20px;
+      gap: 14px;
     }
 
     .life-card-copy {
       display: grid;
-      gap: 10px;
+      gap: 8px;
     }
 
     .life-card-head {
@@ -744,8 +801,8 @@
     .life-card-intro {
       margin-top: 6px;
       color: var(--muted);
-      font-size: 0.96rem;
-      line-height: 1.82;
+      font-size: 0.9rem;
+      line-height: 1.68;
     }
 
     .media-slot-grid {
@@ -766,7 +823,7 @@
     }
 
     .support-video-slot {
-      min-height: clamp(220px, 24vw, 320px);
+      min-height: clamp(180px, 18vw, 240px);
       aspect-ratio: 4 / 5;
     }
 
@@ -868,95 +925,44 @@
 
     .photo-stack-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: var(--grid-gap);
     }
 
     .photo-stack-card {
-      display: grid;
-      gap: 14px;
-      padding: 18px;
+      position: relative;
+      display: block;
+      width: 100%;
+      min-width: 0;
+      padding: 0;
+      aspect-ratio: 4 / 5;
+      border: 1px solid rgba(255, 255, 255, 0.84);
       border-radius: 26px;
       background: rgba(255, 255, 252, 0.74);
-      border: 1px solid rgba(255, 255, 255, 0.84);
-      box-shadow: 0 12px 28px rgba(70, 82, 76, 0.05);
-    }
-
-    .photo-stack-stage {
-      position: relative;
-      min-height: clamp(220px, 24vw, 310px);
-    }
-
-    .photo-stack-layer {
-      position: absolute;
-      inset: 50% auto auto 50%;
-      width: 72%;
-      max-width: 210px;
-      aspect-ratio: 4 / 5;
+      box-shadow: 0 12px 28px rgba(70, 82, 76, 0.08);
       overflow: hidden;
-      border-radius: 22px;
-      border: 1px solid rgba(255, 255, 255, 0.86);
-      background: rgba(255, 255, 255, 0.62);
-      box-shadow: 0 18px 36px rgba(70, 82, 76, 0.10);
-      transform: translate(-50%, -50%) translate(var(--stack-x), var(--stack-y)) rotate(var(--stack-rotate));
-      transition: transform var(--transition), box-shadow var(--transition);
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      appearance: none;
+      -webkit-appearance: none;
     }
 
-    .photo-stack-layer:nth-child(1) {
-      --stack-x: -40px;
-      --stack-y: 22px;
-      --stack-rotate: -11deg;
-      z-index: 1;
+    .photo-stack-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 32px rgba(70, 82, 76, 0.10);
+      border-color: rgba(255, 255, 255, 0.92);
     }
 
-    .photo-stack-layer:nth-child(2) {
-      --stack-x: 0px;
-      --stack-y: 0px;
-      --stack-rotate: -1deg;
-      z-index: 3;
+    .photo-stack-card:focus-visible {
+      outline: 2px solid rgba(96, 125, 114, 0.48);
+      outline-offset: 4px;
     }
 
-    .photo-stack-layer:nth-child(3) {
-      --stack-x: 42px;
-      --stack-y: 22px;
-      --stack-rotate: 9deg;
-      z-index: 2;
-    }
-
-    .photo-stack-card:hover .photo-stack-layer:nth-child(1) {
-      transform: translate(-50%, -50%) translate(-52px, 18px) rotate(-13deg);
-    }
-
-    .photo-stack-card:hover .photo-stack-layer:nth-child(2) {
-      transform: translate(-50%, -50%) translate(0px, -8px) rotate(0deg);
-    }
-
-    .photo-stack-card:hover .photo-stack-layer:nth-child(3) {
-      transform: translate(-50%, -50%) translate(52px, 18px) rotate(11deg);
-    }
-
-    .photo-stack-layer img {
+    .photo-stack-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
-    }
-
-    .photo-stack-meta {
-      display: grid;
-      gap: 4px;
-    }
-
-    .photo-stack-title {
-      font-size: 0.96rem;
-      line-height: 1.5;
-      font-weight: 700;
-    }
-
-    .photo-stack-note {
-      color: var(--muted);
-      font-size: 0.82rem;
-      line-height: 1.58;
     }
 
     .travel-timeline {
@@ -968,14 +974,14 @@
     .travel-timeline-item {
       position: relative;
       display: grid;
-      grid-template-columns: 72px minmax(0, 1fr);
+      grid-template-columns: 84px minmax(0, 1fr);
       gap: 14px;
       padding: 6px 0 14px;
     }
 
     .travel-photo-slot {
-      width: 72px;
-      height: 72px;
+      width: 84px;
+      height: 84px;
       border-radius: 50%;
       border: 1px dashed rgba(118, 144, 176, 0.42);
       background:
@@ -1005,7 +1011,7 @@
     }
 
     .travel-entry {
-      min-height: 72px;
+      min-height: 84px;
       padding-bottom: 6px;
       border-bottom: 1px solid rgba(89, 111, 140, 0.10);
       display: grid;
@@ -1045,9 +1051,9 @@
     }
 
     .travel-timeline-horizontal {
-      --travel-node-size: clamp(70px, 5vw, 88px);
-      --travel-col-gap: clamp(10px, 1.5vw, 18px);
-      --travel-row-gap: clamp(18px, 2vw, 26px);
+      --travel-node-size: clamp(92px, 6vw, 118px);
+      --travel-col-gap: clamp(12px, 1.8vw, 22px);
+      --travel-row-gap: clamp(20px, 2.2vw, 30px);
       position: relative;
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -1055,7 +1061,7 @@
       column-gap: var(--travel-col-gap);
       row-gap: var(--travel-row-gap);
       margin: 8px 0 0;
-      padding: 14px 4px 10px;
+      padding: 16px 6px 12px;
       overflow: visible;
       align-items: start;
       min-height: auto;
@@ -1071,10 +1077,10 @@
       flex-direction: column;
       align-items: center;
       justify-self: stretch;
-      gap: 12px;
+      gap: 14px;
       padding: 0;
       min-width: 0;
-      min-height: calc(var(--travel-node-size) + 48px);
+      min-height: calc(var(--travel-node-size) + 56px);
       z-index: 1;
     }
 
@@ -1191,7 +1197,7 @@
     }
 
     .travel-timeline-horizontal .travel-entry strong {
-      font-size: 1.02rem;
+      font-size: 1.08rem;
     }
 
     .sr-only {
@@ -1208,18 +1214,18 @@
 
     .projects-carousel-shell {
       display: grid;
-      gap: 24px;
+      gap: 16px;
     }
 
     .experience-carousel-shell {
-      gap: 20px;
+      gap: 14px;
     }
 
     .projects-carousel-frame {
       position: relative;
       padding: 0;
       overflow: hidden;
-      border-radius: 30px;
+      border-radius: 26px;
     }
 
     .projects-carousel-footer {
@@ -1263,22 +1269,22 @@
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       display: grid;
-      gap: 24px;
+      gap: 16px;
     }
 
     .projects-showcase-head {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      gap: 18px;
-      padding-bottom: 16px;
+      gap: 14px;
+      padding-bottom: 12px;
       border-bottom: 1px solid rgba(103, 118, 110, 0.12);
     }
 
     .projects-showcase-kicker {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       color: var(--accent-blue);
-      font-size: 0.76rem;
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -1286,17 +1292,18 @@
 
     .projects-showcase-head h3 {
       font-family: var(--font-display);
-      font-size: clamp(1.48rem, 2.2vw, 2rem);
+      font-size: clamp(1.4rem, 2vw, 1.9rem);
       line-height: 1.16;
       letter-spacing: -0.04em;
       font-weight: 600;
     }
 
     .projects-showcase-head p {
-      margin-top: 10px;
+      margin-top: 8px;
       max-width: 72ch;
       color: var(--muted);
-      line-height: 1.86;
+      font-size: 0.96rem;
+      line-height: 1.8;
     }
 
     .projects-showcase-grid {
@@ -1326,7 +1333,7 @@
     .experience-carousel-shell .exp-card {
       min-height: 100%;
       padding: var(--panel-padding);
-      border-radius: 30px;
+      border-radius: 26px;
       background: rgba(249, 249, 244, 0.58);
       box-shadow: 0 16px 44px rgba(70, 82, 76, 0.07);
       backdrop-filter: blur(18px);
@@ -1344,21 +1351,21 @@
 
     .experience-summary {
       color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.84;
+      font-size: 0.98rem;
+      line-height: 1.8;
     }
 
     .experience-focus-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
+      gap: 12px;
     }
 
     .experience-focus-card {
       display: grid;
-      gap: 10px;
-      padding: 18px;
-      border-radius: 22px;
+      gap: 8px;
+      padding: 14px;
+      border-radius: 18px;
       background: rgba(255, 255, 255, 0.74);
       border: 1px solid rgba(228, 234, 228, 0.86);
       box-shadow: 0 10px 24px rgba(70, 82, 76, 0.04);
@@ -1366,7 +1373,7 @@
 
     .experience-focus-label {
       color: #60786d;
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       font-weight: 700;
       line-height: 1.2;
       letter-spacing: 0.08em;
@@ -1374,7 +1381,7 @@
     }
 
     .experience-focus-title {
-      font-size: 1rem;
+      font-size: 0.98rem;
       line-height: 1.54;
       font-weight: 700;
       letter-spacing: -0.02em;
@@ -1384,10 +1391,10 @@
       margin: 0;
       padding-left: 18px;
       display: grid;
-      gap: 8px;
+      gap: 6px;
       color: var(--muted);
-      font-size: 0.94rem;
-      line-height: 1.74;
+      font-size: 0.92rem;
+      line-height: 1.72;
     }
 
     .project-chip {
@@ -1809,7 +1816,7 @@
 
     .profile-name h1 {
       font-family: var(--font-display);
-      font-size: clamp(1.34rem, 2.4vw, 1.9rem);
+      font-size: clamp(1.28rem, 2.15vw, 1.76rem);
       line-height: 1.12;
       letter-spacing: -0.04em;
       font-weight: 600;
@@ -1829,8 +1836,8 @@
       grid-template-columns: 22px minmax(0, 1fr);
       gap: 12px;
       align-items: start;
-      font-size: 0.96rem;
-      line-height: 1.76;
+      font-size: 0.93rem;
+      line-height: 1.7;
     }
 
     .profile-meta-icon {
@@ -1845,8 +1852,8 @@
     }
 
     .profile-skills h2 {
-      font-size: 1.12rem;
-      margin-bottom: 14px;
+      font-size: 1.06rem;
+      margin-bottom: 12px;
       letter-spacing: -0.02em;
     }
 
@@ -1864,7 +1871,7 @@
 
     .skill-row strong {
       padding-top: 4px;
-      font-size: 0.94rem;
+      font-size: 0.91rem;
       color: #4f645b;
     }
 
@@ -1880,7 +1887,7 @@
       background: rgba(241, 245, 239, 0.84);
       border: 1px solid var(--chip-border);
       color: var(--chip-text);
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       line-height: 1;
     }
 
@@ -1921,7 +1928,7 @@
 
     .story-heading h2 {
       font-family: var(--font-display);
-      font-size: clamp(1.46rem, 2.3vw, 1.94rem);
+      font-size: clamp(1.36rem, 2vw, 1.78rem);
       line-height: 1.14;
       letter-spacing: -0.04em;
       font-weight: 600;
@@ -1929,8 +1936,8 @@
 
     .story-panel p {
       color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.78;
+      font-size: 0.96rem;
+      line-height: 1.72;
     }
 
     .story-panel p + p {
@@ -1939,7 +1946,7 @@
 
     .story-highlight {
       margin-top: 14px;
-      font-size: 1.08rem;
+      font-size: 1.03rem;
       font-weight: 700;
       color: var(--accent-blue);
     }
@@ -2021,6 +2028,7 @@
       z-index: 1;
       width: var(--shell-width);
       height: auto;
+      min-height: auto;
       max-height: none;
       margin: 0;
       padding: var(--panel-padding);
@@ -2036,8 +2044,8 @@
 
     .content-section.home-slide .section-head {
       flex-shrink: 0;
-      margin-bottom: 20px;
-      padding-bottom: 14px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
       border-bottom: 1px solid rgba(103, 118, 110, 0.12);
     }
 
@@ -2088,15 +2096,15 @@
 
     @media (min-width: 1025px) {
       .hero.home-slide .hero-inner {
-        padding: clamp(68px, 6.6vh, 78px) 0 clamp(20px, 2.2vh, 26px);
-        gap: clamp(20px, 2vw, 26px);
+        padding: clamp(58px, 5.8vh, 68px) 0 clamp(14px, 1.6vh, 20px);
+        gap: clamp(16px, 1.5vw, 20px);
         align-items: start;
       }
 
       .home-profile-panel {
         align-self: start;
         height: auto;
-        width: min(100%, clamp(260px, 36vh, 392px));
+        width: min(100%, clamp(240px, 32vh, 344px));
         padding: 0;
         display: flex;
         flex-direction: column;
@@ -2113,7 +2121,7 @@
       }
 
       .profile-photo {
-        width: min(100%, clamp(260px, 36vh, 392px));
+        width: min(100%, clamp(240px, 32vh, 344px));
         margin: 0;
       }
 
@@ -2127,12 +2135,12 @@
       }
 
       .profile-name h1 {
-        font-size: clamp(1.56rem, 0.72vw + 1rem, 2.12rem);
+        font-size: clamp(1.46rem, 0.64vw + 1rem, 1.94rem);
       }
 
       .profile-meta li {
-        font-size: clamp(0.95rem, 0.18vw + 0.9rem, 1.02rem);
-        line-height: 1.68;
+        font-size: clamp(0.92rem, 0.16vw + 0.88rem, 0.99rem);
+        line-height: 1.64;
       }
 
       .profile-skills {
@@ -2141,26 +2149,26 @@
       }
 
       .profile-skills h2 {
-        font-size: clamp(1.08rem, 0.28vw + 1rem, 1.2rem);
+        font-size: clamp(1.02rem, 0.24vw + 0.94rem, 1.14rem);
         margin-bottom: 10px;
       }
 
       .profile-skill-pill {
-        padding: 8px 12px;
-        font-size: 0.9rem;
+        padding: 7px 10px;
+        font-size: 0.87rem;
       }
 
       .story-panel {
-        padding: clamp(20px, 1.4vw + 8px, 26px);
+        padding: clamp(16px, 1vw + 8px, 20px);
       }
 
       .story-heading h2 {
-        font-size: clamp(1.62rem, 0.82vw + 1.02rem, 2.08rem);
+        font-size: clamp(1.5rem, 0.66vw + 1rem, 1.92rem);
       }
 
       .story-panel p {
-        font-size: clamp(0.98rem, 0.2vw + 0.92rem, 1.05rem);
-        line-height: 1.7;
+        font-size: clamp(0.94rem, 0.18vw + 0.9rem, 1rem);
+        line-height: 1.68;
       }
 
       .story-panel p + p {
@@ -2168,7 +2176,7 @@
       }
 
       .story-highlight {
-        font-size: clamp(1.08rem, 0.28vw + 1rem, 1.2rem);
+        font-size: clamp(1.02rem, 0.22vw + 0.96rem, 1.1rem);
       }
 
       .home-strength-list {
@@ -2181,13 +2189,13 @@
       }
 
       .strength-content h3 {
-        font-size: clamp(1rem, 0.2vw + 0.96rem, 1.08rem);
-        line-height: 1.54;
+        font-size: clamp(0.96rem, 0.16vw + 0.9rem, 1.02rem);
+        line-height: 1.5;
       }
 
       .strength-content p {
-        font-size: clamp(0.94rem, 0.16vw + 0.9rem, 1rem);
-        line-height: 1.64;
+        font-size: clamp(0.9rem, 0.14vw + 0.86rem, 0.96rem);
+        line-height: 1.6;
       }
     }
 
@@ -2214,18 +2222,18 @@
     @media (max-width: 1024px) {
       :root {
         --page-gutter: clamp(20px, 4vw, 28px);
-        --section-pad-top: clamp(44px, 5.5vw, 54px);
-        --section-pad-bottom: 10px;
-        --panel-padding: clamp(20px, 2.4vw, 24px);
-        --card-padding: clamp(18px, 2.2vw, 22px);
-        --stack-gap: 20px;
-        --grid-gap: 18px;
+        --section-pad-top: clamp(20px, 3.6vw, 28px);
+        --section-pad-bottom: 6px;
+        --panel-padding: clamp(16px, 2vw, 18px);
+        --card-padding: clamp(14px, 1.8vw, 16px);
+        --stack-gap: 16px;
+        --grid-gap: 14px;
       }
 
       .hero.home-slide .hero-inner {
         grid-template-columns: 1fr;
         gap: 14px;
-        padding: 72px 0 18px;
+        padding: 60px 0 14px;
       }
 
       .home-profile-panel {
@@ -2270,17 +2278,17 @@
     @media (max-width: 760px) {
       :root {
         --page-gutter: 16px;
-        --section-pad-top: 38px;
-        --section-pad-bottom: 6px;
-        --panel-padding: 18px 16px;
-        --card-padding: 18px 16px;
-        --stack-gap: 18px;
-        --grid-gap: 16px;
+        --section-pad-top: 16px;
+        --section-pad-bottom: 4px;
+        --panel-padding: 14px 14px;
+        --card-padding: 14px 14px;
+        --stack-gap: 14px;
+        --grid-gap: 12px;
       }
 
       .hero.home-slide .hero-inner {
         width: var(--shell-width);
-        padding: 64px 0 12px;
+        padding: 52px 0 10px;
       }
 
       .home-profile-panel {
@@ -2317,8 +2325,8 @@
 
       .story-panel p,
       .strength-content p {
-        font-size: 0.95rem;
-        line-height: 1.78;
+        font-size: 0.88rem;
+        line-height: 1.64;
       }
 
       .strength-entry {
@@ -2333,6 +2341,7 @@
       .content-section.home-slide .section-card {
         width: var(--shell-width);
         height: auto;
+        min-height: auto;
         max-height: none;
       }
 
@@ -2363,15 +2372,7 @@
       }
 
       .support-video-slot {
-        min-height: 240px;
-      }
-
-      .photo-stack-card {
-        padding: 16px;
-      }
-
-      .photo-stack-stage {
-        min-height: 260px;
+        min-height: 220px;
       }
 
       .travel-timeline-item {
@@ -2395,7 +2396,7 @@
       }
 
       .travel-timeline-horizontal {
-        --travel-node-size: 58px;
+        --travel-node-size: 68px;
         --travel-col-gap: 8px;
         --travel-row-gap: 14px;
         column-gap: 8px;
@@ -2868,7 +2869,7 @@
                             </ul>
                           </div>
                           <div class="resource-row">
-                            <span class="resource-link resource-link-placeholder">项目链接（预留）</span>
+                            <a class="resource-link" href="https://cv-xinxinli.vercel.app/" target="_blank" rel="noreferrer">项目链接</a>
                             <a class="resource-link" href="https://my.feishu.cn/wiki/X1lPwerPnisAz3kwX0tcllMJnQe?fromScene=spaceOverview" target="_blank" rel="noreferrer">PRD</a>
                           </div>
                           <div class="tag-grid">
@@ -2901,7 +2902,7 @@
                           <div class="media-slot project-media-slot has-image" style="--slot-position: center top;">
                             <img class="slot-image" src="coze图片生成.png" alt="Coze 图片生成项目界面" loading="lazy">
                             <span class="media-slot-label">Coze 图片生成</span>
-                            <span class="media-slot-note">项目图片占位预留</span>
+                            <span class="media-slot-note">项目图片展示</span>
                           </div>
                           <div class="project-section-block">
                             <div class="project-section-label">关注点</div>
@@ -2923,10 +2924,10 @@
                             <div class="project-chip">视频生成</div>
                           </div>
                           <p class="card-text">围绕情绪表达与叙事内容，验证从脚本到视频结果的生成体验。</p>
-                          <div class="media-slot project-media-slot project-media-slot--video has-image" style="--slot-position: center 50%;">
-                            <img class="slot-image" src="coze视频生成.png?refresh=20260427" alt="Coze 视频生成项目界面" loading="lazy">
+                          <div class="media-slot project-media-slot project-media-slot--video has-video">
+                            <video class="slot-video" src="coze视频生成-视频.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Coze 视频生成项目演示视频"></video>
                             <span class="media-slot-label">Coze 视频生成</span>
-                            <span class="media-slot-note">项目图片占位预留</span>
+                            <span class="media-slot-note">项目视频演示</span>
                           </div>
                           <div class="project-section-block">
                             <div class="project-section-label">关注点</div>
@@ -3005,27 +3006,33 @@
         </div>
         <div class="section-scroll-body">
           <div class="content-stack">
-            <p class="section-lead">在校园媒体运营、内容策划与活动支持中，我从内容创作者逐步走向团队组织者，持续训练协作、传播和推进能力，也逐渐形成了“把人和事情连接起来”的工作方式：学会在多人协作中拆解任务、建立节奏、协调资源，也更习惯从用户视角判断什么内容值得被看见、被参与、被传播；这些经历也沉淀成后来做产品时的重要工作方式。</p>
-            <div class="tag-grid">
-              <span class="tag">任务拆解</span>
-              <span class="tag">协调资源</span>
-              <span class="tag">用户视角</span>
-              <span class="tag">传播判断</span>
-              <span class="tag">AI 产品方向</span>
+            <div class="campus-intro-panel">
+              <p class="section-lead">在校园媒体运营、内容策划与活动支持中，我从内容创作者逐步走向团队组织者，持续训练协作、传播和推进能力，也逐渐形成了“把人和事情连接起来”的工作方式。</p>
+              <p class="campus-intro-note">这些经历让我学会在多人协作中拆解任务、建立节奏、协调资源，也更习惯从用户视角判断什么内容值得被看见、被参与、被传播；它们也沉淀成后来做产品时的重要工作方式。</p>
+              <div class="tag-grid">
+                <span class="tag">任务拆解</span>
+                <span class="tag">协调资源</span>
+                <span class="tag">用户视角</span>
+                <span class="tag">传播判断</span>
+                <span class="tag">AI 产品方向</span>
+              </div>
             </div>
 
             <div class="subsection">
               <div class="story-grid">
-                <article class="honor-card">
+                <article class="honor-card campus-role-card">
                   <div class="card-title">北京邮电大学学生记者团｜总负责人</div>
                   <p class="card-text" style="margin-top: 12px;">在北邮学生记者团的三年里，我从新媒体部门文案组一路成长为记者团总负责人，逐渐完成了从“内容创作者”到“团队组织者”的转变。</p>
                   <ul class="detail-list">
-                    <li>记者团负责学校官方微博、官方微信公众号、官方抖音、官方 B 站等宣传媒体运营，内部设有记者部、影视部、新媒体部、编辑部等多个部门，整体规模约 500 人。</li>
+                    <li>记者团负责学校官方微博、官方微信公众号、官方抖音、官方 B 站等宣传媒体运营，内部设有记者部、影视部、新媒体部、编辑部等多个部门，整体规模约 <strong>500 人</strong>。</li>
                     <li>在任期间，我主要负责记者团整体统筹规划、部门协作管理、内容选题策划，以及与老师、校内各部门的沟通对接。</li>
-                    <li>我参与并推动了校园街拍、邮苑节气、初雪系列等内容策划，统筹完成 50+ 篇官方微信推送，以及 20+ 次微博、抖音选题策划。</li>
+                    <li>我参与并推动了校园街拍、邮苑节气、初雪系列等内容策划，统筹完成 <strong>50+</strong> 篇官方微信推送，以及 <strong>20+</strong> 次微博、抖音选题策划。</li>
                   </ul>
-                  <p class="note-text">我印象最深的是“初雪推送”。它本身具有很强的时效性和情绪价值，需要在很短时间内完成拍摄、选片、文案、排版与发布；我需要协调记者部、影视部、新媒体部等多个部门分工与排班，在保证内容质量的同时尽可能抢占最佳传播时间窗口。</p>
-                  <p class="note-text"><strong>What I Learned：</strong>好的内容不只依赖灵感，更依赖明确分工、稳定节奏和多部门协同；在高时效任务里，快速判断优先级并推动大家同步行动，往往比单点创意更重要。</p>
+                  <p class="note-text campus-case-note">我印象最深的是“初雪推送”。它本身具有很强的时效性和情绪价值，需要在很短时间内完成拍摄、选片、文案、排版与发布；我需要协调记者部、影视部、新媒体部等多个部门分工与排班，在保证内容质量的同时尽可能抢占最佳传播时间窗口。</p>
+                  <div class="campus-learned-box">
+                    <div class="campus-learned-label">What I Learned</div>
+                    <p class="campus-learned-text">好的内容不只依赖灵感，更依赖明确分工、稳定节奏和多部门协同；在高时效任务里，快速判断优先级并推动大家同步行动，往往比单点创意更重要。</p>
+                  </div>
                   <div class="tag-grid">
                     <span class="tag">500 人规模</span>
                     <span class="tag">50+ 官方微信推送</span>
@@ -3033,15 +3040,18 @@
                     <span class="tag">初雪推送</span>
                   </div>
                 </article>
-                <article class="honor-card">
+                <article class="honor-card campus-role-card">
                   <div class="card-title">团委新媒体中心｜副主任</div>
                   <p class="card-text" style="margin-top: 12px;">在团委新媒体中心，我主要负责【北邮青年】微信公众号、抖音、B 站等平台的内容运营与选题策划，参与学校团委宣传工作的整体执行。</p>
                   <ul class="detail-list">
-                    <li>负责公众号推送的选题、文案、排版及发布节奏把控，曾统筹策划多篇阅读量 10W+ 的内容。</li>
-                    <li>其中，“一周 CP”活动通过轻量互动形式连接校内同学，吸引千人规模参与，显著提升了账号的校园影响力和用户活跃度。</li>
+                    <li>负责公众号推送的选题、文案、排版及发布节奏把控，曾统筹策划多篇阅读量 <strong>10W+</strong> 的内容。</li>
+                    <li>其中，“一周 CP”活动通过轻量互动形式连接校内同学，吸引 <strong>千人规模</strong> 参与，显著提升了账号的校园影响力和用户活跃度。</li>
                   </ul>
-                  <p class="note-text">“一周 CP”让我更明显地感受到，校园内容如果只是单向传达信息，往往很难形成真正的互动；只有把选题做成同学愿意参与、愿意表达的形式，内容才会真正被看见。</p>
-                  <p class="note-text"><strong>What I Learned：</strong>有效传播不是“通知到位”就结束了，而是要从受众真实关心的话题出发设计表达方式；当内容降低参与门槛、保留情绪连接时，影响力和活跃度才会自然增长。</p>
+                  <p class="note-text campus-case-note">“一周 CP”让我更明显地感受到，校园内容如果只是单向传达信息，往往很难形成真正的互动；只有把选题做成同学愿意参与、愿意表达的形式，内容才会真正被看见。</p>
+                  <div class="campus-learned-box">
+                    <div class="campus-learned-label">What I Learned</div>
+                    <p class="campus-learned-text">有效传播不是“通知到位”就结束了，而是要从受众真实关心的话题出发设计表达方式；当内容降低参与门槛、保留情绪连接时，影响力和活跃度才会自然增长。</p>
+                  </div>
                   <div class="tag-grid">
                     <span class="tag">10W+ 内容</span>
                     <span class="tag">一周 CP</span>
@@ -3097,9 +3107,10 @@
                             <span class="media-slot-label">支教视频 02</span>
                             <span class="media-slot-note">课堂 / 活动视频</span>
                           </div>
-                          <div class="media-slot support-video-slot">
+                          <div class="media-slot support-video-slot has-video">
+                            <video class="slot-video" src="支教视频3.mp4" controls preload="metadata" playsinline muted></video>
                             <span class="media-slot-label">支教视频 03</span>
-                            <span class="media-slot-note">视频素材预留，后续可继续补充</span>
+                            <span class="media-slot-note">课堂 / 活动视频</span>
                           </div>
                         </div>
                       </div>
@@ -3122,51 +3133,16 @@
                           <span class="tag">生活切片</span>
                           <span class="tag">光线观察</span>
                         </div>
-                        <div class="photo-stack-grid" aria-label="摄影折叠展示">
-                          <article class="photo-stack-card">
-                            <div class="photo-stack-stage">
-                              <div class="photo-stack-layer"><img src="摄影作品1.1.jpg" alt="摄影记录 01 组图 1" loading="lazy"></div>
-                              <div class="photo-stack-layer"><img src="摄影作品1.2.jpg" alt="摄影记录 01 组图 2" loading="lazy"></div>
-                              <div class="photo-stack-layer"><img src="摄影作品1.3.jpg" alt="摄影记录 01 组图 3" loading="lazy"></div>
-                            </div>
-                            <div class="photo-stack-meta">
-                              <strong class="photo-stack-title">摄影记录 01</strong>
-                              <span class="photo-stack-note">人物与光线的瞬间记录</span>
-                            </div>
-                          </article>
-                          <article class="photo-stack-card">
-                            <div class="photo-stack-stage">
-                              <div class="photo-stack-layer"><img src="摄影作品2.1.jpg" alt="摄影记录 02 组图 1" loading="lazy"></div>
-                              <div class="photo-stack-layer"><img src="摄影作品2.2.jpg" alt="摄影记录 02 组图 2" loading="lazy"></div>
-                              <div class="photo-stack-layer"><img src="摄影作品2.3.jpg" alt="摄影记录 02 组图 3" loading="lazy"></div>
-                            </div>
-                            <div class="photo-stack-meta">
-                              <strong class="photo-stack-title">摄影记录 02</strong>
-                              <span class="photo-stack-note">保留现场氛围和情绪的切片</span>
-                            </div>
-                          </article>
-                          <article class="photo-stack-card">
-                            <div class="photo-stack-stage">
-                              <div class="photo-stack-layer"><img src="摄影作品3.1.jpg" alt="摄影记录 03 组图 1" loading="lazy"></div>
-                              <div class="photo-stack-layer"><img src="摄影作品3.2.jpg" alt="摄影记录 03 组图 2" loading="lazy"></div>
-                              <div class="photo-stack-layer"><img src="摄影作品3.3.jpg" alt="摄影记录 03 组图 3" loading="lazy"></div>
-                            </div>
-                            <div class="photo-stack-meta">
-                              <strong class="photo-stack-title">摄影记录 03</strong>
-                              <span class="photo-stack-note">街角、人物和光影关系的观察</span>
-                            </div>
-                          </article>
-                          <article class="photo-stack-card">
-                            <div class="photo-stack-stage">
-                              <div class="photo-stack-layer"><img src="摄影作品4.1.jpg" alt="摄影记录 04 组图 1" loading="lazy"></div>
-                              <div class="photo-stack-layer"><img src="摄影作品4.2.jpg" alt="摄影记录 04 组图 2" loading="lazy"></div>
-                              <div class="photo-stack-layer"><img src="摄影作品4.3.jpg" alt="摄影记录 04 组图 3" loading="lazy"></div>
-                            </div>
-                            <div class="photo-stack-meta">
-                              <strong class="photo-stack-title">摄影记录 04</strong>
-                              <span class="photo-stack-note">日常生活中被留住的一瞬间</span>
-                            </div>
-                          </article>
+                        <div class="photo-stack-grid" aria-label="摄影大图展示">
+                          <button class="photo-stack-card" type="button" data-photo-gallery data-photo-label="摄影记录 01" data-photo-images="摄影作品1.1.jpg|摄影作品1.2.jpg|摄影作品1.3.jpg" data-photo-index="0" aria-label="点击切换摄影记录 01 下一张">
+                            <img class="slot-image" src="摄影作品1.1.jpg" alt="摄影记录 01 组图 1" loading="lazy">
+                          </button>
+                          <button class="photo-stack-card" type="button" data-photo-gallery data-photo-label="摄影记录 03" data-photo-images="摄影作品3.1.jpg|摄影作品3.2.jpg|摄影作品3.3.jpg" data-photo-index="0" aria-label="点击切换摄影记录 03 下一张">
+                            <img class="slot-image" src="摄影作品3.1.jpg" alt="摄影记录 03 组图 1" loading="lazy">
+                          </button>
+                          <button class="photo-stack-card" type="button" data-photo-gallery data-photo-label="摄影记录 04" data-photo-images="摄影作品4.1.jpg|摄影作品4.2.jpg|摄影作品4.3.jpg" data-photo-index="0" aria-label="点击切换摄影记录 04 下一张">
+                            <img class="slot-image" src="摄影作品4.1.jpg" alt="摄影记录 04 组图 1" loading="lazy">
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -3299,6 +3275,7 @@
     const homeScrollContainer = document.getElementById("homeScrollContainer");
     const homeSection = document.getElementById("home");
     const heroBg = document.getElementById("heroBg");
+    const topNav = document.querySelector(".top-nav");
     const navLinks = Array.from(document.querySelectorAll(".nav-link"));
     const pageSections = Array.from(document.querySelectorAll(".home-slide[id]"));
     const revealNodes = Array.from(document.querySelectorAll("[data-reveal]"));
@@ -3319,6 +3296,7 @@
     const lifeIndicators = Array.from(document.querySelectorAll("#life .projects-indicator"));
     const lifePrevButton = document.getElementById("lifePrev");
     const lifeNextButton = document.getElementById("lifeNext");
+    const photoGalleryButtons = Array.from(document.querySelectorAll("[data-photo-gallery]"));
     const rootStyle = document.documentElement.style;
     const heroGradient = "linear-gradient(180deg, rgba(249, 250, 244, 0.50), rgba(249, 250, 244, 0.64) 34%, rgba(239, 243, 236, 0.78) 76%, rgba(244, 246, 241, 0.92) 100%)";
 
@@ -3395,10 +3373,12 @@
         return;
       }
 
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest"
+      const navOffset = (topNav ? topNav.getBoundingClientRect().height : 0) + 20;
+      const targetTop = window.scrollY + target.getBoundingClientRect().top - navOffset;
+
+      window.scrollTo({
+        top: Math.max(0, targetTop),
+        behavior: "smooth"
       });
     }
 
@@ -3410,14 +3390,11 @@
     }
 
     function updateActiveNav() {
-      const viewportCenter = window.scrollY + window.innerHeight / 2;
+      const activationLine = window.scrollY + (topNav ? topNav.getBoundingClientRect().height : 0) + 28;
       let currentId = pageSections[0] ? pageSections[0].id : "home";
 
       pageSections.forEach((section) => {
-        const sectionStart = section.offsetTop;
-        const sectionEnd = sectionStart + section.offsetHeight;
-
-        if (viewportCenter >= sectionStart && viewportCenter < sectionEnd) {
+        if (activationLine >= section.offsetTop) {
           currentId = section.id;
         }
       });
@@ -3678,25 +3655,42 @@
       updateLifeCarousel();
     }
 
+    function bindPhotoGalleries() {
+      if (!photoGalleryButtons.length) {
+        return;
+      }
+
+      photoGalleryButtons.forEach((button) => {
+        const imageNode = button.querySelector("img");
+        const images = (button.dataset.photoImages || "").split("|").map((item) => item.trim()).filter(Boolean);
+        const label = button.dataset.photoLabel || "摄影记录";
+
+        if (!imageNode || images.length <= 1) {
+          return;
+        }
+
+        button.addEventListener("click", () => {
+          const currentIndex = Number(button.dataset.photoIndex || "0");
+          const nextIndex = (currentIndex + 1) % images.length;
+          button.dataset.photoIndex = String(nextIndex);
+          imageNode.src = images[nextIndex];
+          imageNode.alt = `${label} 组图 ${nextIndex + 1}`;
+        });
+      });
+    }
+
     function handleWheel(event) {
       if (event.ctrlKey) {
         return;
       }
 
       const horizontalCarousel = event.target.closest(".projects-carousel-track, .travel-timeline-horizontal");
+      const horizontalIntent = Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey;
       const horizontalDelta = event.deltaX || (event.shiftKey ? event.deltaY : 0);
 
-      if (horizontalCarousel && horizontalDelta && canScrollHorizontally(horizontalCarousel, horizontalDelta)) {
-        if (!event.deltaX && event.shiftKey) {
-          event.preventDefault();
-          horizontalCarousel.scrollLeft += normalizeWheelDelta(horizontalDelta, event.deltaMode);
-        }
-        return;
-      }
-
-      if (horizontalCarousel && !event.deltaX && !event.shiftKey && canScrollHorizontally(horizontalCarousel, event.deltaY)) {
+      if (horizontalCarousel && horizontalIntent && horizontalDelta && canScrollHorizontally(horizontalCarousel, horizontalDelta)) {
         event.preventDefault();
-        horizontalCarousel.scrollLeft += normalizeWheelDelta(event.deltaY, event.deltaMode);
+        horizontalCarousel.scrollLeft += normalizeWheelDelta(horizontalDelta, event.deltaMode);
         return;
       }
 
@@ -3819,6 +3813,7 @@
     bindExperienceCarousel();
     bindProjectsCarousel();
     bindLifeCarousel();
+    bindPhotoGalleries();
     loadAvatar();
     handleScroll();
     updateExperienceCarousel();

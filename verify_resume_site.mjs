@@ -61,10 +61,12 @@ const requiredSnippets = [
   "一周 CP",
   "支教视频1.mp4",
   "支教视频2.mp4",
+  "支教视频3.mp4",
   "摄影作品1.1.jpg",
+  "摄影作品3.1.jpg",
   "摄影作品4.3.jpg",
   "coze图片生成.png",
-  "coze视频生成.png",
+  "coze视频生成-视频.mp4",
   "洛阳.jpg",
   "贵阳.jpg",
   "海口.jpg",
@@ -72,7 +74,7 @@ const requiredSnippets = [
   "贵阳",
   "海口",
   "重庆",
-  "What I Learned：",
+  "What I Learned",
   "把人和事情连接起来",
   "Graph / DAG 并行执行",
   "未登录可用 AI 语音",
@@ -101,7 +103,7 @@ const requiredSnippets = [
   "https://j9t6xysnrc.coze.site/",
   "https://low-cost-seeker-app.nocode.host",
   "https://my.feishu.cn/wiki/X1lPwerPnisAz3kwX0tcllMJnQe?fromScene=spaceOverview",
-  "项目链接（预留）"
+  "https://cv-xinxinli.vercel.app/"
 ];
 
 requiredSnippets.forEach((snippet) => {
@@ -159,7 +161,7 @@ assert.ok(
 );
 
 assert.equal(
-  (html.match(/What I Learned：/g) || []).length,
+  (html.match(/class="campus-learned-label">What I Learned<\/div>/g) || []).length,
   2,
   "校园经历每段未补充 What I Learned 总结"
 );
@@ -321,20 +323,51 @@ assert.equal(
 
 assert.equal(
   (html.match(/<video class="slot-video"/g) || []).length,
-  2,
-  "支教已接入的视频数量不正确"
+  4,
+  "页面已接入的视频数量不正确"
 );
 
 assert.equal(
   (html.match(/class="photo-stack-card"/g) || []).length,
-  4,
-  "摄影折叠卡片数量不正确"
+  3,
+  "摄影大图卡片数量不正确"
 );
 
 assert.equal(
-  (html.match(/class="photo-stack-layer"/g) || []).length,
-  12,
-  "摄影折叠图片层数量不正确"
+  (html.match(/class="photo-stack-card"[^>]*data-photo-gallery/g) || []).length,
+  3,
+  "摄影点击切换的大图卡数量不正确"
+);
+
+assert.ok(
+  !html.includes("摄影作品2.1.jpg"),
+  "摄影记录 02 仍未移除"
+);
+
+assert.ok(
+  !html.includes("photo-stack-meta"),
+  "摄影图片旁的说明文字仍未移除"
+);
+
+assert.ok(
+  !html.includes("photo-stack-layer"),
+  "摄影模块仍保留旧的折叠图片层结构"
+);
+
+assert.ok(
+  !html.includes("摄影折叠展示"),
+  "摄影模块仍保留旧的折叠展示标注"
+);
+
+assert.ok(
+  !html.includes("项目链接（预留）"),
+  "个人网站项目仍保留链接占位文案"
+);
+
+assert.equal(
+  (html.match(/class="campus-learned-box"/g) || []).length,
+  2,
+  "校园经历 What I Learned 高亮块数量不正确"
 );
 
 assert.equal(
@@ -345,8 +378,19 @@ assert.equal(
 
 assert.equal(
   (html.match(/class="media-slot project-media-slot(?: project-media-slot--video)? has-image"/g) || []).length,
-  2,
+  1,
   "Coze 项目图片数量不正确"
+);
+
+assert.equal(
+  (html.match(/class="media-slot project-media-slot project-media-slot--video has-video"/g) || []).length,
+  1,
+  "Coze 视频项目数量不正确"
+);
+
+assert.ok(
+  !html.includes("coze视频生成.png"),
+  "Coze 视频模块仍在使用旧图片素材"
 );
 
 assert.equal(
@@ -495,7 +539,7 @@ assert.match(
 
 assert.match(
   html,
-  /--section-pad-top:\s*clamp\(48px, 5vw, 60px\);[\s\S]*--section-pad-bottom:\s*clamp\(6px, 1\.2vw, 12px\);[\s\S]*--panel-padding:\s*clamp\(20px, 2vw, 26px\);[\s\S]*--card-padding:\s*clamp\(20px, 1\.8vw, 24px\);[\s\S]*--stack-gap:\s*clamp\(24px, 2\.2vw, 30px\);[\s\S]*--grid-gap:\s*clamp\(24px, 2vw, 28px\);/,
+  /--section-pad-top:\s*clamp\(24px, 2\.8vw, 34px\);[\s\S]*--section-pad-bottom:\s*clamp\(2px, 0\.4vw, 6px\);[\s\S]*--panel-padding:\s*clamp\(16px, 1\.4vw, 20px\);[\s\S]*--card-padding:\s*clamp\(14px, 1\.2vw, 18px\);[\s\S]*--stack-gap:\s*clamp\(14px, 1\.4vw, 20px\);[\s\S]*--grid-gap:\s*clamp\(14px, 1\.4vw, 20px\);/,
   "缺少统一的 section / panel / card spacing 变量"
 );
 
@@ -567,13 +611,13 @@ assert.match(
 
 assert.match(
   html,
-  /@media \(min-width: 1025px\)\s*\{[\s\S]*\.profile-photo\s*\{[\s\S]*width:\s*min\(100%, clamp\(260px, 36vh, 392px\)\);[\s\S]*margin:\s*0;/,
+  /@media \(min-width: 1025px\)\s*\{[\s\S]*\.profile-photo\s*\{[\s\S]*width:\s*min\(100%, clamp\(240px, 32vh, 344px\)\);[\s\S]*margin:\s*0;/,
   "桌面端头像尺寸或左对齐方式未按首页要求更新"
 );
 
 assert.match(
   html,
-  /@media \(min-width: 1025px\)\s*\{[\s\S]*\.home-profile-panel\s*\{[\s\S]*width:\s*min\(100%, clamp\(260px, 36vh, 392px\)\);[\s\S]*align-items:\s*flex-start;/,
+  /@media \(min-width: 1025px\)\s*\{[\s\S]*\.home-profile-panel\s*\{[\s\S]*width:\s*min\(100%, clamp\(240px, 32vh, 344px\)\);[\s\S]*align-items:\s*flex-start;/,
   "首页左侧头像与个人信息未统一左对齐"
 );
 
@@ -591,13 +635,13 @@ assert.match(
 
 assert.match(
   html,
-  /@media \(min-width: 1025px\)\s*\{[\s\S]*\.profile-name h1\s*\{[\s\S]*font-size:\s*clamp\(1\.56rem, 0\.72vw \+ 1rem, 2\.12rem\);[\s\S]*\.story-heading h2\s*\{[\s\S]*font-size:\s*clamp\(1\.62rem, 0\.82vw \+ 1\.02rem, 2\.08rem\);/,
+  /@media \(min-width: 1025px\)\s*\{[\s\S]*\.profile-name h1\s*\{[\s\S]*font-size:\s*clamp\(1\.46rem, 0\.64vw \+ 1rem, 1\.94rem\);[\s\S]*\.story-heading h2\s*\{[\s\S]*font-size:\s*clamp\(1\.5rem, 0\.66vw \+ 1rem, 1\.92rem\);/,
   "桌面端首页标题字号未按页面比例优化"
 );
 
 assert.match(
   html,
-  /@media \(min-width: 1025px\)\s*\{[\s\S]*\.story-panel p\s*\{[\s\S]*font-size:\s*clamp\(0\.98rem, 0\.2vw \+ 0\.92rem, 1\.05rem\);/,
+  /@media \(min-width: 1025px\)\s*\{[\s\S]*\.story-panel p\s*\{[\s\S]*font-size:\s*clamp\(0\.94rem, 0\.18vw \+ 0\.9rem, 1rem\);/,
   "桌面端首页正文大小未按页面比例优化"
 );
 
@@ -777,14 +821,20 @@ assert.match(
 
 assert.match(
   html,
-  /\.photo-stack-grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\);[\s\S]*\.photo-stack-layer:nth-child\(1\)\s*\{[\s\S]*--stack-rotate:\s*-11deg;[\s\S]*\.photo-stack-card:hover \.photo-stack-layer:nth-child\(3\)\s*\{[\s\S]*rotate\(11deg\);/,
-  "摄影模块未切换为 stack 式折叠展示"
+  /\.photo-stack-grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\);[\s\S]*\.photo-stack-card\s*\{[\s\S]*aspect-ratio:\s*4 \/ 5;[\s\S]*cursor:\s*pointer;[\s\S]*\.photo-stack-card:hover\s*\{[\s\S]*translateY\(-2px\);/,
+  "摄影模块未切换为大图点击展示"
 );
 
 assert.match(
   html,
-  /\.support-video-slot\s*\{[\s\S]*aspect-ratio:\s*4 \/ 5;[\s\S]*\.media-slot\.has-video\s*\{[\s\S]*border-style:\s*solid;[\s\S]*\.slot-video\s*\{[\s\S]*object-fit:\s*cover;/,
+  /\.support-video-slot\s*\{[\s\S]*min-height:\s*clamp\(180px, 18vw, 240px\);[\s\S]*aspect-ratio:\s*4 \/ 5;[\s\S]*\.media-slot\.has-video\s*\{[\s\S]*border-style:\s*solid;[\s\S]*\.slot-video\s*\{[\s\S]*object-fit:\s*cover;/,
   "支教模块未切换为视频展示槽"
+);
+
+assert.match(
+  html,
+  /function bindPhotoGalleries\(\)[\s\S]*button\.dataset\.photoImages[\s\S]*imageNode\.src = images\[nextIndex\][\s\S]*imageNode\.alt = `\$\{label\} 组图 \$\{nextIndex \+ 1\}`;/,
+  "摄影模块缺少点击切换下一张的脚本逻辑"
 );
 
 assert.match(
@@ -850,6 +900,12 @@ assert.match(
 
 assert.match(
   html,
+  /\.travel-timeline-item\s*\{[\s\S]*grid-template-columns:\s*84px minmax\(0, 1fr\);[\s\S]*\.travel-photo-slot\s*\{[\s\S]*width:\s*84px;[\s\S]*height:\s*84px;[\s\S]*\.travel-timeline-horizontal\s*\{[\s\S]*--travel-node-size:\s*clamp\(92px, 6vw, 118px\);/,
+  "旅行模块图片尺寸未按最新要求放大"
+);
+
+assert.match(
+  html,
   /\.travel-timeline-horizontal \.travel-timeline-item:nth-child\(6\)\s*\{[\s\S]*grid-column:\s*5;[\s\S]*grid-row:\s*2;/,
   "旅行时间轴第二排起始城市位置不正确"
 );
@@ -888,6 +944,16 @@ assert.match(
   html,
   /\.life-showcase-card \.projects-showcase-head p\s*\{[\s\S]*max-width:\s*none;[\s\S]*width:\s*100%;/,
   "生活与爱好标题说明未铺满横向空间"
+);
+
+assert.ok(
+  html.includes("我喜欢用镜头把人物、光线和生活里转瞬即逝的氛围留住，让情绪和现场感继续被保存。"),
+  "摄影日常顶部总结文字缺失"
+);
+
+assert.ok(
+  html.includes("我喜欢记录人物、街角和光线在一天里变化的样子。很多照片未必是“作品”，但它们会帮我留住当时的氛围、关系和心情，也让我继续练习观察细节。"),
+  "摄影日常正文总结文字缺失"
 );
 
 assert.match(
@@ -952,7 +1018,7 @@ assert.match(
 assert.match(
   html,
   /\.content-section\.home-slide\s*\{[\s\S]*min-height:\s*auto;[\s\S]*padding:\s*var\(--section-pad-top\) var\(--page-gutter\) var\(--section-pad-bottom\);[\s\S]*\.content-section\.home-slide \.section-card\s*\{[\s\S]*width:\s*var\(--shell-width\);[\s\S]*height:\s*auto;[\s\S]*max-height:\s*none;[\s\S]*padding:\s*var\(--panel-padding\);[\s\S]*overflow:\s*visible;/,
-  "内容区外层 section 未收敛为同页连续排布所需的紧凑节奏"
+  "内容区外层 section 未恢复为按内容自适应的连续排布"
 );
 
 assert.match(
@@ -976,7 +1042,7 @@ assert.match(
 assert.match(
   html,
   /\.section-scroll-body\s*\{[\s\S]*flex:\s*0 1 auto;[\s\S]*overflow:\s*visible;[\s\S]*padding-right:\s*0;/,
-  "内容模块内部仍保留旧的强制滚动区"
+  "内容模块内部仍未恢复为按内容自然展开"
 );
 
 assert.match(
@@ -987,7 +1053,7 @@ assert.match(
 
 assert.match(
   html,
-  /@media \(max-width: 1024px\)\s*\{[\s\S]*:root\s*\{[\s\S]*--page-gutter:\s*clamp\(20px, 4vw, 28px\);[\s\S]*--section-pad-top:\s*clamp\(44px, 5\.5vw, 54px\);[\s\S]*--section-pad-bottom:\s*10px;[\s\S]*--panel-padding:\s*clamp\(20px, 2\.4vw, 24px\);[\s\S]*--grid-gap:\s*18px;[\s\S]*\.photo-stack-grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\);[\s\S]*\.experience-focus-grid\s*\{[\s\S]*grid-template-columns:\s*1fr;/,
+  /@media \(max-width: 1024px\)\s*\{[\s\S]*:root\s*\{[\s\S]*--page-gutter:\s*clamp\(20px, 4vw, 28px\);[\s\S]*--section-pad-top:\s*clamp\(20px, 3\.6vw, 28px\);[\s\S]*--section-pad-bottom:\s*6px;[\s\S]*--panel-padding:\s*clamp\(16px, 2vw, 18px\);[\s\S]*--card-padding:\s*clamp\(14px, 1\.8vw, 16px\);[\s\S]*--grid-gap:\s*14px;[\s\S]*\.photo-stack-grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\);[\s\S]*\.experience-focus-grid\s*\{[\s\S]*grid-template-columns:\s*1fr;/,
   "平板端 spacing 变量未收敛到更紧凑的范围"
 );
 
@@ -1005,8 +1071,8 @@ assert.match(
 
 assert.match(
   html,
-  /function updateActiveNav\(\)[\s\S]*window\.scrollY \+ window\.innerHeight \/ 2[\s\S]*section\.offsetTop[\s\S]*section\.offsetHeight/,
-  "导航高亮逻辑未切换为纵向页面判断"
+  /function updateActiveNav\(\)[\s\S]*const activationLine = window\.scrollY \+ \(topNav \? topNav\.getBoundingClientRect\(\)\.height : 0\) \+ 28[\s\S]*section\.offsetTop/,
+  "导航高亮逻辑未切换为基于顶部落点的纵向页面判断"
 );
 
 assert.match(
@@ -1023,8 +1089,8 @@ assert.match(
 
 assert.match(
   html,
-  /scrollIntoView\(\{[\s\S]*behavior:\s*"smooth"[\s\S]*block:\s*"start"[\s\S]*inline:\s*"nearest"[\s\S]*\}\);/,
-  "缺少导航平滑切换到纵向区块的逻辑"
+  /window\.scrollTo\(\{[\s\S]*top:\s*Math\.max\(0, targetTop\),[\s\S]*behavior:\s*"smooth"[\s\S]*\}\);/,
+  "缺少导航平滑切换到对应区块顶部的逻辑"
 );
 
 assert.ok(
@@ -1038,6 +1104,11 @@ assert.match(
   "模块内横向轮播缺少滚轮位移逻辑"
 );
 
+assert.ok(
+  !html.includes("!event.deltaX && !event.shiftKey && canScrollHorizontally(horizontalCarousel, event.deltaY)"),
+  "横向轮播仍在使用纵向滚轮强制劫持左右滑动"
+);
+
 assert.match(
   html,
   /@media \(max-width: 760px\)/,
@@ -1046,20 +1117,32 @@ assert.match(
 
 assert.match(
   html,
-  /@media \(max-width: 760px\)\s*\{[\s\S]*:root\s*\{[\s\S]*--page-gutter:\s*16px;[\s\S]*--section-pad-top:\s*38px;[\s\S]*--section-pad-bottom:\s*6px;[\s\S]*--panel-padding:\s*18px 16px;[\s\S]*--card-padding:\s*18px 16px;/,
+  /@media \(max-width: 760px\)\s*\{[\s\S]*:root\s*\{[\s\S]*--page-gutter:\s*16px;[\s\S]*--section-pad-top:\s*16px;[\s\S]*--section-pad-bottom:\s*4px;[\s\S]*--panel-padding:\s*14px 14px;[\s\S]*--card-padding:\s*14px 14px;/,
   "移动端左右留白未收敛到 16px 级别的 spacing 体系"
 );
 
 assert.match(
   html,
-  /@media \(max-width: 760px\)\s*\{[\s\S]*\.photo-stack-grid\s*\{[\s\S]*grid-template-columns:\s*1fr;[\s\S]*\.support-video-slot\s*\{[\s\S]*min-height:\s*240px;/,
-  "移动端摄影 stack 或支教视频槽未同步收敛"
+  /@media \(max-width: 760px\)\s*\{[\s\S]*\.photo-stack-grid\s*\{[\s\S]*grid-template-columns:\s*1fr;[\s\S]*\.support-video-slot\s*\{[\s\S]*min-height:\s*220px;/,
+  "移动端摄影大图或支教视频槽未同步收敛"
 );
 
 assert.match(
   html,
-  /@media \(max-width: 760px\)\s*\{[\s\S]*\.content-section\.home-slide\s*\{[\s\S]*padding:\s*var\(--section-pad-top\) var\(--page-gutter\) var\(--section-pad-bottom\);[\s\S]*\.content-section\.home-slide \.section-card\s*\{[\s\S]*width:\s*var\(--shell-width\);/,
-  "移动端生活与爱好模块的 stack / 视频 / section spacing 未同步收敛"
+  /@media \(max-width: 760px\)\s*\{[\s\S]*\.travel-timeline-horizontal\s*\{[\s\S]*--travel-node-size:\s*68px;[\s\S]*\.travel-timeline-horizontal \.travel-timeline-item\s*\{[\s\S]*min-height:\s*calc\(var\(--travel-node-size\) \+ 40px\);/,
+  "移动端旅行时间轴图片尺寸未同步放大"
+);
+
+assert.match(
+  html,
+  /@media \(max-width: 760px\)\s*\{[\s\S]*\.content-section\.home-slide\s*\{[\s\S]*padding:\s*var\(--section-pad-top\) var\(--page-gutter\) var\(--section-pad-bottom\);[\s\S]*\.content-section\.home-slide \.section-card\s*\{[\s\S]*width:\s*var\(--shell-width\);[\s\S]*max-height:\s*none;/,
+  "移动端内容模块未恢复为按内容展开的布局"
+);
+
+assert.match(
+  html,
+  /\.campus-intro-panel\s*\{[\s\S]*padding:\s*16px 18px;[\s\S]*\.campus-learned-box\s*\{[\s\S]*padding:\s*14px 16px;/,
+  "校园经历缺少新的导语面板或 What I Learned 高亮样式"
 );
 
 assert.match(
