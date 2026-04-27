@@ -5,24 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>李新新 | AI产品经理</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:wght@500;600;700&family=Public+Sans:wght@300;400;500;600;700&display=swap');
+
     :root {
-      --bg: #f6f1ea;
-      --paper: rgba(255, 253, 249, 0.92);
-      --paper-solid: #fffdfa;
-      --text: #181614;
-      --muted: #5e5751;
-      --line: rgba(24, 20, 16, 0.08);
-      --line-strong: rgba(24, 20, 16, 0.14);
-      --accent: #f2e6d7;
-      --shadow: 0 22px 60px rgba(40, 28, 16, 0.10);
-      --shadow-strong: 0 30px 80px rgba(40, 28, 16, 0.16);
+      --bg: #edf2ed;
+      --paper: rgba(250, 250, 246, 0.92);
+      --paper-solid: #f8faf6;
+      --text: #1f2724;
+      --muted: #627069;
+      --line: rgba(103, 118, 110, 0.14);
+      --line-strong: rgba(92, 109, 101, 0.24);
+      --accent: rgba(231, 238, 231, 0.94);
+      --accent-blue: #607d72;
+      --accent-blue-soft: rgba(96, 125, 114, 0.14);
+      --chip-bg: rgba(241, 245, 239, 0.86);
+      --chip-bg-hover: rgba(248, 250, 246, 0.96);
+      --chip-border: rgba(122, 140, 129, 0.20);
+      --chip-text: #4e645a;
+      --shadow: 0 24px 70px rgba(67, 80, 73, 0.10);
+      --shadow-strong: 0 30px 84px rgba(58, 72, 64, 0.14);
       --radius-xl: 34px;
       --radius-lg: 26px;
       --radius-md: 20px;
-      --max-width: 1180px;
+      --max-width: 1360px;
       --transition: 240ms cubic-bezier(0.22, 1, 0.36, 1);
       --hero-image: none;
       --hero-shift: 0px;
+      --glass-panel: rgba(249, 249, 244, 0.62);
+      --glass-panel-soft: rgba(246, 248, 243, 0.56);
+      --glass-border: rgba(255, 255, 255, 0.76);
+      --glass-border-soft: rgba(255, 255, 255, 0.68);
+      --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+      --glass-shadow: 0 22px 56px rgba(63, 75, 68, 0.10);
+      --glass-shadow-strong: 0 28px 72px rgba(63, 75, 68, 0.14);
+      --glass-blur: 24px;
+      --font-body: "Public Sans", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      --font-display: "Libre Bodoni", "Times New Roman", serif;
     }
 
     * {
@@ -36,10 +54,10 @@
     body {
       margin: 0;
       color: var(--text);
-      font-family: "SF Pro Display", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-family: var(--font-body);
       background:
-        radial-gradient(circle at top, rgba(255, 255, 255, 0.84), transparent 36%),
-        linear-gradient(180deg, #faf6f0 0%, var(--bg) 100%);
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.92), transparent 36%),
+        linear-gradient(180deg, #f6f7f2 0%, #edf2ed 46%, #e8efea 100%);
       overflow-x: hidden;
     }
 
@@ -57,24 +75,32 @@
 
     .top-nav {
       position: fixed;
-      top: 18px;
-      right: 18px;
+      top: clamp(10px, 1.4vw, 18px);
+      right: clamp(10px, 1.4vw, 18px);
       z-index: 20;
       display: flex;
       gap: 8px;
       padding: 8px;
+      max-width: calc(100vw - 24px);
+      overflow-x: auto;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.74);
-      border: 1px solid rgba(255, 255, 255, 0.92);
-      box-shadow: 0 20px 52px rgba(40, 28, 16, 0.12);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      background: rgba(249, 249, 244, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.90);
+      box-shadow: 0 18px 48px rgba(72, 84, 78, 0.10);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .top-nav::-webkit-scrollbar {
+      display: none;
     }
 
     .nav-link {
+      flex: 0 0 auto;
       padding: 10px 14px;
       border-radius: 999px;
       font-size: 0.92rem;
+      white-space: nowrap;
       color: var(--muted);
       transition: transform var(--transition), background var(--transition), color var(--transition), box-shadow var(--transition);
     }
@@ -82,26 +108,28 @@
     .nav-link:hover {
       transform: translateY(-1px);
       color: var(--text);
-      background: rgba(255, 255, 255, 0.92);
-      box-shadow: 0 10px 24px rgba(40, 28, 16, 0.08);
+      background: rgba(252, 252, 248, 0.92);
+      box-shadow: 0 10px 24px rgba(72, 84, 78, 0.07);
     }
 
     .nav-link.active {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.96);
-      box-shadow: 0 14px 28px rgba(40, 28, 16, 0.10);
+      color: var(--accent-blue);
+      background: rgba(252, 252, 248, 0.96);
+      box-shadow: 0 14px 28px rgba(72, 84, 78, 0.08);
     }
 
     .hero {
       position: relative;
-      height: 255vh;
+      min-height: 100vh;
+      min-height: 100dvh;
+      height: auto;
       scroll-margin-top: 100px;
     }
 
     .hero-stage {
-      position: sticky;
-      top: 0;
+      position: relative;
       min-height: 100vh;
+      min-height: 100dvh;
       overflow: hidden;
     }
 
@@ -109,11 +137,12 @@
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.06) 34%, rgba(255, 255, 255, 0.10) 78%, rgba(255, 255, 255, 0.18) 100%),
+        linear-gradient(180deg, rgba(249, 250, 244, 0.50), rgba(249, 250, 244, 0.64) 34%, rgba(239, 243, 236, 0.78) 76%, rgba(244, 246, 241, 0.92) 100%),
         var(--hero-image);
       background-size: cover;
       background-position: center calc(50% + var(--hero-shift));
-      transform: scale(1.04);
+      transform: scale(1.03);
+      filter: saturate(0.84) brightness(1.04);
       will-change: background-position;
     }
 
@@ -121,8 +150,8 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(90deg, rgba(0, 0, 0, 0.18), transparent 38%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.16) 100%);
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.78), transparent 40%),
+        linear-gradient(100deg, rgba(229, 236, 229, 0.78) 10%, rgba(255, 255, 255, 0.38) 42%, rgba(240, 244, 236, 0.62) 100%);
     }
 
     .hero-inner {
@@ -394,14 +423,14 @@
     }
 
     .section-card {
-      margin-bottom: 24px;
-      padding: 30px;
-      border-radius: var(--radius-xl);
-      background: var(--paper);
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      margin-bottom: 28px;
+      padding: clamp(24px, 2.4vw, 32px);
+      border-radius: 38px;
+      background: rgba(249, 249, 244, 0.68);
+      border: 1px solid rgba(255, 255, 255, 0.92);
+      box-shadow: 0 18px 52px rgba(70, 82, 76, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     .section-head {
@@ -410,17 +439,27 @@
       justify-content: space-between;
       gap: 16px;
       margin-bottom: 22px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
     }
 
     .section-head h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1;
-      letter-spacing: -0.04em;
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 3.7vw, 3.26rem);
+      line-height: 1.08;
+      letter-spacing: -0.05em;
+      font-weight: 600;
     }
 
     .section-side {
-      font-size: 0.9rem;
+      font-size: 0.82rem;
       color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    #experience.home-slide .section-side {
+      display: none;
     }
 
     .card-grid {
@@ -433,12 +472,14 @@
     .portfolio-card,
     .skill-card,
     .honor-card {
-      padding: 22px;
-      border-radius: var(--radius-lg);
-      background: var(--paper-solid);
-      border: 1px solid var(--line);
-      box-shadow: 0 16px 34px rgba(40, 28, 16, 0.06);
-      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      padding: 22px 24px;
+      border-radius: 28px;
+      background: rgba(255, 255, 252, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.84);
+      box-shadow: 0 14px 36px rgba(70, 84, 76, 0.06);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: border-color var(--transition), box-shadow var(--transition);
     }
 
     .edu-card:hover,
@@ -446,9 +487,8 @@
     .portfolio-card:hover,
     .skill-card:hover,
     .honor-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-strong);
-      border-color: var(--line-strong);
+      box-shadow: 0 16px 36px rgba(70, 84, 76, 0.08);
+      border-color: rgba(235, 239, 232, 0.98);
     }
 
     .card-top {
@@ -456,28 +496,34 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(103, 118, 110, 0.12);
     }
 
     .card-title {
       font-size: 1.12rem;
-      line-height: 1.6;
+      line-height: 1.68;
       font-weight: 700;
+      letter-spacing: -0.02em;
     }
 
     .date-pill {
       flex-shrink: 0;
-      padding: 9px 12px;
+      padding: 8px 12px;
       border-radius: 999px;
-      background: var(--accent);
-      border: 1px solid rgba(24, 20, 16, 0.08);
-      color: #453d36;
-      font-size: 0.92rem;
+      background: rgba(241, 245, 239, 0.92);
+      border: 1px solid rgba(217, 226, 217, 0.90);
+      color: #566a60;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
       white-space: nowrap;
     }
 
     .card-text {
       color: var(--muted);
+      font-size: 0.99rem;
       line-height: 1.86;
     }
 
@@ -485,7 +531,7 @@
       margin: 0;
       padding-left: 18px;
       color: var(--muted);
-      line-height: 1.84;
+      line-height: 1.86;
       display: grid;
       gap: 10px;
     }
@@ -497,7 +543,7 @@
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
+      gap: 14px;
     }
 
     .portfolio-card.large {
@@ -525,31 +571,737 @@
     .skill-layout {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
+      gap: 14px;
     }
 
     .tag-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
+      gap: 8px;
+      margin-top: 18px;
     }
 
     .tag {
-      padding: 9px 12px;
+      padding: 6px 11px;
       border-radius: 999px;
-      background: #f8f1e8;
-      border: 1px solid rgba(24, 20, 16, 0.08);
-      color: #423a34;
+      background: rgba(244, 247, 241, 0.90);
+      border: 1px solid rgba(206, 218, 209, 0.82);
+      color: #62756b;
+      font-size: 0.82rem;
+      line-height: 1.2;
     }
 
     .traits-list {
       margin: 14px 0 0;
       padding-left: 18px;
       display: grid;
-      gap: 10px;
+      gap: 8px;
       color: var(--muted);
-      line-height: 1.84;
+      line-height: 1.76;
+    }
+
+    .content-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .section-lead {
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.92;
+      max-width: 88ch;
+    }
+
+    #experience.home-slide .section-lead,
+    #projects.home-slide .section-lead,
+    #campus.home-slide .section-lead,
+    #life.home-slide .section-lead {
+      max-width: none;
+      width: 100%;
+    }
+
+    .subsection {
+      display: grid;
+      gap: 12px;
+    }
+
+    .subsection-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .subsection-head h3 {
+      font-size: 1.04rem;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    .subsection-head p {
+      max-width: 48ch;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.72;
+      text-align: right;
+    }
+
+    .info-grid,
+    .story-grid,
+    .strength-grid,
+    .campus-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .info-grid,
+    .story-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .strength-grid,
+    .campus-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .resource-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .resource-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
+      color: var(--accent-blue);
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color var(--transition), opacity var(--transition);
+    }
+
+    .resource-link:hover {
+      color: #48665c;
+      opacity: 0.86;
+    }
+
+    .resource-link-placeholder {
+      color: var(--muted);
+      text-decoration-style: dashed;
+      cursor: default;
+    }
+
+    .resource-link-placeholder:hover {
+      opacity: 1;
+    }
+
+    .note-text {
+      margin-top: 12px;
+      color: #546a84;
+      font-size: 0.98rem;
+      line-height: 1.86;
+    }
+
+    .life-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.9fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .life-card {
+      display: grid;
+      gap: 18px;
+    }
+
+    .life-card-copy {
+      display: grid;
+      gap: 12px;
+    }
+
+    .life-card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .life-card-intro {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.82;
+    }
+
+    .media-slot-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .media-slot-grid--support {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .media-slot-grid--photo {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .photography-photo-slot {
+      min-height: clamp(96px, 10vw, 138px);
+    }
+
+    .media-slot {
+      position: relative;
+      min-height: 118px;
+      padding: 14px;
+      border-radius: 20px;
+      border: 1px dashed rgba(118, 144, 176, 0.34);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.52), rgba(232, 240, 250, 0.42)),
+        rgba(248, 251, 255, 0.74);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 6px;
+      overflow: hidden;
+    }
+
+    .media-slot::before {
+      content: "+";
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      color: rgba(89, 111, 140, 0.48);
+      font-size: 1.3rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .media-slot-label {
+      font-size: 0.94rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .media-slot-note {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
+    .media-slot.has-image {
+      padding: 0;
+      border-style: solid;
+      border-color: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.32);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.52),
+        0 12px 28px rgba(55, 77, 104, 0.10);
+    }
+
+    .media-slot.has-image::before {
+      display: none;
+    }
+
+    .media-slot.has-image .media-slot-label,
+    .media-slot.has-image .media-slot-note {
+      display: none;
+    }
+
+    .slot-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: var(--slot-position, center);
+    }
+
+    .travel-timeline {
+      list-style: none;
+      margin: 8px 0 0;
+      padding: 0;
+    }
+
+    .travel-timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 72px minmax(0, 1fr);
+      gap: 14px;
+      padding: 6px 0 14px;
+    }
+
+    .travel-photo-slot {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 1px dashed rgba(118, 144, 176, 0.42);
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.84), rgba(230, 239, 250, 0.72)),
+        rgba(248, 251, 255, 0.78);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+      display: grid;
+      place-items: center;
+      color: var(--chip-text);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .travel-photo-slot.has-image {
+      display: block;
+      padding: 0;
+      overflow: hidden;
+      border-style: solid;
+      border-color: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.62),
+        0 10px 22px rgba(55, 77, 104, 0.10);
+      color: transparent;
+      line-height: 0;
+    }
+
+    .travel-entry {
+      min-height: 72px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(89, 111, 140, 0.10);
+      display: grid;
+      align-content: center;
+      gap: 4px;
+    }
+
+    .travel-timeline-item:last-child .travel-entry {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .travel-order {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.5;
+      letter-spacing: 0.04em;
+    }
+
+    .travel-entry strong {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .projects-showcase-card.life-showcase-card {
+      gap: 20px;
+    }
+
+    .life-showcase-card .projects-showcase-head > div {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .life-showcase-card .projects-showcase-head p {
+      max-width: none;
+      width: 100%;
+    }
+
+    .travel-timeline-horizontal {
+      --travel-node-size: clamp(70px, 5vw, 88px);
+      --travel-col-gap: clamp(10px, 1.5vw, 18px);
+      --travel-row-gap: clamp(18px, 2vw, 26px);
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-rows: repeat(2, auto);
+      column-gap: var(--travel-col-gap);
+      row-gap: var(--travel-row-gap);
+      margin: 8px 0 0;
+      padding: 14px 4px 10px;
+      overflow: visible;
+      align-items: start;
+      min-height: auto;
+      scroll-snap-type: none;
+    }
+
+    .travel-timeline-horizontal::-webkit-scrollbar {
+      display: none;
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-self: stretch;
+      gap: 12px;
+      padding: 0;
+      min-width: 0;
+      min-height: calc(var(--travel-node-size) + 48px);
+      z-index: 1;
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item:nth-child(1) {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item:nth-child(2) {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item:nth-child(3) {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item:nth-child(4) {
+      grid-column: 4;
+      grid-row: 1;
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item:nth-child(5) {
+      grid-column: 5;
+      grid-row: 1;
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item:nth-child(6) {
+      grid-column: 5;
+      grid-row: 2;
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item:nth-child(7) {
+      grid-column: 4;
+      grid-row: 2;
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item:nth-child(8) {
+      grid-column: 3;
+      grid-row: 2;
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item:nth-child(9) {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item:nth-child(10) {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.84;
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item:nth-child(-n+4)::after {
+      top: calc(var(--travel-node-size) / 2);
+      left: calc(50% + (var(--travel-node-size) / 2));
+      width: calc(100% + var(--travel-col-gap) - var(--travel-node-size));
+      border-top: 1.6px solid rgba(118, 144, 176, 0.42);
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item:nth-child(5)::after {
+      top: calc(var(--travel-node-size) / 2);
+      left: 50%;
+      width: 0;
+      height: calc(100% + var(--travel-row-gap) - (var(--travel-node-size) / 2));
+      border-left: 1.6px solid rgba(118, 144, 176, 0.42);
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item:nth-child(n+6):not(:nth-child(10))::after {
+      top: calc(var(--travel-node-size) / 2);
+      right: calc(50% + (var(--travel-node-size) / 2));
+      width: calc(100% + var(--travel-col-gap) - var(--travel-node-size));
+      border-top: 1.6px solid rgba(118, 144, 176, 0.42);
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item:nth-child(10)::after {
+      display: none;
+    }
+
+    .travel-timeline-horizontal .travel-timeline-item:not(:last-child)::before {
+      display: none;
+    }
+
+    .travel-timeline-horizontal .travel-photo-slot {
+      width: var(--travel-node-size);
+      height: var(--travel-node-size);
+      font-size: 0.94rem;
+    }
+
+    .travel-timeline-horizontal .travel-photo-slot,
+    .travel-timeline-horizontal .travel-entry {
+      position: relative;
+      z-index: 1;
+    }
+
+    .travel-timeline-horizontal .travel-entry {
+      min-height: auto;
+      padding: 0;
+      border-bottom: 0;
+      text-align: center;
+      justify-items: center;
+    }
+
+    .travel-timeline-horizontal .travel-order {
+      font-size: 0.78rem;
+    }
+
+    .travel-timeline-horizontal .travel-entry strong {
+      font-size: 1.02rem;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .projects-carousel-shell {
+      display: grid;
+      gap: 18px;
+    }
+
+    .projects-carousel-frame {
+      position: relative;
+      padding: 0;
+      overflow: hidden;
+      border-radius: 30px;
+    }
+
+    .projects-carousel-footer {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 14px;
+      width: min(100%, 320px);
+      margin: 0 auto;
+    }
+
+    .projects-carousel-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+      border-radius: var(--radius-lg);
+      touch-action: pan-x pan-y;
+    }
+
+    .projects-carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .projects-slide,
+    .life-slide,
+    .experience-slide {
+      flex: 0 0 100%;
+      width: 100%;
+      scroll-snap-align: start;
+    }
+
+    .projects-showcase-card {
+      padding: clamp(22px, 2.4vw, 30px);
+      border-radius: 30px;
+      background: rgba(249, 249, 244, 0.56);
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      box-shadow: 0 16px 44px rgba(70, 82, 76, 0.07);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      display: grid;
+      gap: 20px;
+    }
+
+    .projects-showcase-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(103, 118, 110, 0.12);
+    }
+
+    .projects-showcase-kicker {
+      margin-bottom: 10px;
+      color: var(--accent-blue);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .projects-showcase-head h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.48rem, 2.2vw, 2rem);
+      line-height: 1.16;
+      letter-spacing: -0.04em;
+      font-weight: 600;
+    }
+
+    .projects-showcase-head p {
+      margin-top: 10px;
+      max-width: 72ch;
+      color: var(--muted);
+      line-height: 1.86;
+    }
+
+    .projects-showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .projects-showcase-grid--triple {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .projects-showcase-grid.single-column {
+      grid-template-columns: 1fr;
+    }
+
+    .project-showcase-item {
+      padding: 22px 24px;
+      border-radius: 26px;
+      background: rgba(255, 255, 252, 0.74);
+      border: 1px solid rgba(255, 255, 255, 0.84);
+      box-shadow: 0 12px 28px rgba(70, 82, 76, 0.05);
+      display: grid;
+      gap: 14px;
+    }
+
+    .experience-carousel-shell .exp-card {
+      min-height: 100%;
+      padding: clamp(24px, 2.6vw, 32px);
+      border-radius: 30px;
+      background: rgba(249, 249, 244, 0.58);
+      box-shadow: 0 16px 44px rgba(70, 82, 76, 0.07);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .experience-carousel-shell .exp-card .detail-list {
+      max-width: 92ch;
+    }
+
+    .project-chip {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(241, 245, 239, 0.92);
+      border: 1px solid rgba(217, 226, 217, 0.88);
+      color: #5c7065;
+      font-size: 0.84rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .project-section-block {
+      display: grid;
+      gap: 8px;
+    }
+
+    .project-section-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #5d7469;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .project-detail-list {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      line-height: 1.82;
+    }
+
+    .project-value-note {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.66;
+    }
+
+    .project-media-slot {
+      min-height: 0;
+      aspect-ratio: 16 / 10;
+      border-radius: 18px;
+    }
+
+    .project-media-slot--video {
+      aspect-ratio: 16 / 9;
+    }
+
+    .projects-carousel-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255, 255, 255, 0.88);
+      border-radius: 16px;
+      background: rgba(249, 249, 244, 0.80);
+      color: var(--text);
+      font-size: 1.25rem;
+      line-height: 1;
+      box-shadow: 0 12px 28px rgba(70, 82, 76, 0.10);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition), background var(--transition);
+    }
+
+    .projects-carousel-button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 32px rgba(70, 82, 76, 0.12);
+      background: rgba(252, 252, 248, 0.92);
+    }
+
+    .projects-carousel-button:disabled {
+      opacity: 0.42;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    .projects-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .projects-indicator {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(95, 112, 105, 0.22);
+      cursor: pointer;
+      transition: width var(--transition), background var(--transition), transform var(--transition);
+    }
+
+    .projects-indicator.active {
+      width: 30px;
+      background: var(--accent-blue);
+      transform: scaleY(1.02);
     }
 
     .reveal {
@@ -563,10 +1315,35 @@
       transform: translateY(0);
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal,
+      .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
     @media (max-width: 980px) {
       .slide-grid,
+      .info-grid,
+      .story-grid,
+      .strength-grid,
+      .campus-grid,
       .skill-layout,
-      .portfolio-grid {
+      .portfolio-grid,
+      .projects-showcase-grid {
         grid-template-columns: 1fr;
       }
 
@@ -582,21 +1359,32 @@
       .page-main {
         margin-top: -4vh;
       }
+
+      .projects-carousel-frame {
+        padding-inline: 0;
+      }
+
+      .projects-carousel-footer {
+        width: min(100%, 260px);
+      }
     }
 
     @media (max-width: 760px) {
       .top-nav {
-        top: 12px;
-        right: 12px;
-        left: 12px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
+        top: 10px;
+        right: 8px;
+        left: 8px;
+        padding: 6px;
         gap: 6px;
+        max-width: none;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        border-radius: 18px;
       }
 
       .nav-link {
-        padding: 9px 12px;
-        font-size: 0.86rem;
+        padding: 8px 10px;
+        font-size: 0.82rem;
       }
 
       .hero {
@@ -634,13 +1422,796 @@
       }
 
       .section-head,
-      .card-top {
+      .subsection-head,
+      .card-top,
+      .life-card-head {
         flex-direction: column;
         align-items: flex-start;
       }
 
+      .subsection-head p {
+        text-align: left;
+      }
+
       .page-main {
         padding: 0 14px 44px;
+      }
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    .home-scroll-container {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: block;
+      overflow: visible;
+      scroll-snap-type: none;
+      scroll-behavior: smooth;
+      overscroll-behavior: auto;
+      touch-action: auto;
+      scrollbar-width: auto;
+      background-image:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.72), transparent 28%),
+        linear-gradient(180deg, rgba(248, 249, 243, 0.40), rgba(231, 237, 229, 0.58)),
+        var(--hero-image);
+      background-size: auto, auto, cover;
+      background-position: center, center, center;
+      background-repeat: no-repeat;
+    }
+
+    .home-scroll-container::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    .home-slide {
+      position: relative;
+      inset: auto;
+      display: block;
+      gap: 0;
+      align-content: normal;
+      opacity: 1;
+      transform: none;
+      width: 100%;
+      height: auto;
+      min-height: 100vh;
+      min-height: 100dvh;
+      scroll-snap-align: none;
+      scroll-snap-stop: normal;
+      overflow: visible;
+      transition: none;
+    }
+
+    .hero.home-slide {
+      display: flex;
+      min-height: 100vh;
+      min-height: 100dvh;
+      height: auto;
+      align-items: stretch;
+      justify-content: center;
+      background:
+        linear-gradient(180deg, rgba(248, 249, 243, 0.56), rgba(248, 249, 243, 0.34)),
+        linear-gradient(180deg, #f4f5ef 0%, #e9efea 100%);
+    }
+
+    .hero.home-slide .hero-stage {
+      position: relative;
+      top: auto;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      overflow: visible;
+    }
+
+    .hero.home-slide .hero-bg {
+      background-position: calc(50% + var(--hero-shift)) center;
+    }
+
+    .home-scroll-body {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
+      height: auto;
+      overflow: visible;
+      overscroll-behavior: auto;
+      scrollbar-width: auto;
+      scrollbar-color: auto;
+    }
+
+    .home-scroll-body::-webkit-scrollbar {
+      width: 0;
+    }
+
+    .home-scroll-body::-webkit-scrollbar-thumb {
+      background: transparent;
+    }
+
+    .hero.home-slide .hero-inner {
+      width: min(var(--max-width), calc(100vw - clamp(20px, 2.4vw, 32px)));
+      min-height: 100%;
+      margin: 0 auto;
+      padding: clamp(76px, 8vw, 84px) 0 clamp(16px, 2vw, 20px);
+      display: grid;
+      grid-template-columns: 4fr 6fr;
+      gap: clamp(14px, 1.8vw, 20px);
+      align-items: start;
+    }
+
+    .home-profile-panel {
+      position: relative;
+      top: auto;
+      align-self: start;
+      align-items: flex-start;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .profile-photo {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: 32px;
+      background:
+        linear-gradient(145deg, rgba(185, 203, 189, 0.72), rgba(244, 245, 239, 0.84)),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.10));
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      box-shadow:
+        0 24px 54px rgba(71, 83, 77, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.42);
+    }
+
+    .profile-photo::before {
+      content: "李";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(3.8rem, 7vw, 5.8rem);
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.88);
+      letter-spacing: 0.08em;
+    }
+
+    .profile-photo.loaded::before {
+      opacity: 0;
+    }
+
+    .profile-photo-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 320ms ease;
+    }
+
+    .profile-photo.loaded .profile-photo-image {
+      opacity: 1;
+    }
+
+    .profile-body {
+      padding: 18px 2px 4px;
+    }
+
+    .profile-name {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .profile-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: var(--accent-blue-soft);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+      font-size: 1.05rem;
+      flex-shrink: 0;
+    }
+
+    .profile-name h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.34rem, 2.4vw, 1.9rem);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 600;
+    }
+
+    .profile-meta {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 13px;
+      color: var(--chip-text);
+    }
+
+    .profile-meta li {
+      display: grid;
+      grid-template-columns: 22px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      font-size: 0.96rem;
+      line-height: 1.76;
+    }
+
+    .profile-meta-icon {
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    .profile-skills {
+      margin-top: 24px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(103, 118, 110, 0.10);
+    }
+
+    .profile-skills h2 {
+      font-size: 1.12rem;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .skill-group {
+      display: grid;
+      gap: 12px;
+    }
+
+    .skill-row {
+      display: grid;
+      grid-template-columns: 54px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .skill-row strong {
+      padding-top: 4px;
+      font-size: 0.94rem;
+      color: #4f645b;
+    }
+
+    .skill-pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .profile-skill-pill {
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(241, 245, 239, 0.84);
+      border: 1px solid var(--chip-border);
+      color: var(--chip-text);
+      font-size: 0.88rem;
+      line-height: 1;
+    }
+
+    .home-story-column {
+      display: grid;
+      gap: clamp(14px, 1.6vw, 18px);
+      align-content: start;
+    }
+
+    .story-panel {
+      padding: clamp(22px, 2.6vw, 30px);
+      border-radius: 32px;
+      background: var(--glass-panel);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-highlight), var(--glass-shadow);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+    }
+
+    .story-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .story-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(223, 232, 224, 0.96), rgba(251, 252, 248, 0.96));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.64);
+      flex-shrink: 0;
+    }
+
+    .story-heading h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.46rem, 2.3vw, 1.94rem);
+      line-height: 1.14;
+      letter-spacing: -0.04em;
+      font-weight: 600;
+    }
+
+    .story-panel p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.78;
+    }
+
+    .story-panel p + p {
+      margin-top: 12px;
+    }
+
+    .story-highlight {
+      margin-top: 14px;
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+    }
+
+    .home-strength-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .strength-entry {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      align-items: start;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(103, 118, 110, 0.10);
+    }
+
+    .strength-entry:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .strength-content h3 {
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+      line-height: 1.6;
+    }
+
+    .strength-content p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.72;
+    }
+
+    .strength-content strong,
+    .story-panel strong {
+      color: var(--text);
+    }
+
+    .content-section.home-slide {
+      position: relative;
+      display: flex;
+      min-height: 100vh;
+      min-height: 100dvh;
+      align-items: flex-start;
+      justify-content: center;
+      padding: clamp(84px, 9vw, 104px) clamp(10px, 1.8vw, 16px) clamp(22px, 3vw, 34px);
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(248, 249, 243, 0.72), rgba(243, 246, 240, 0.58));
+    }
+
+    .content-section.home-slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(180deg, rgba(249, 250, 244, 0.50), rgba(249, 250, 244, 0.64) 34%, rgba(239, 243, 236, 0.78) 76%, rgba(244, 246, 241, 0.92) 100%),
+        var(--hero-image);
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.03);
+      filter: saturate(0.84) brightness(1.04);
+    }
+
+    .content-section.home-slide::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.78), transparent 40%),
+        linear-gradient(100deg, rgba(229, 236, 229, 0.78) 10%, rgba(255, 255, 255, 0.38) 42%, rgba(240, 244, 236, 0.62) 100%);
+    }
+
+    .content-section.home-slide .section-card {
+      position: relative;
+      z-index: 1;
+      width: min(var(--max-width), calc(100vw - clamp(20px, 2.4vw, 32px)));
+      height: auto;
+      max-height: none;
+      margin: 0;
+      padding: clamp(22px, 2vw, 28px);
+      background: rgba(249, 249, 244, 0.68);
+      border: 1px solid rgba(255, 255, 255, 0.90);
+      box-shadow: 0 18px 48px rgba(70, 82, 76, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      overflow: visible;
+    }
+
+    .content-section.home-slide .section-head {
+      flex-shrink: 0;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(103, 118, 110, 0.12);
+    }
+
+    .section-scroll-body {
+      flex: 0 1 auto;
+      min-height: 0;
+      overflow: visible;
+      overscroll-behavior: auto;
+      padding-right: 0;
+      scrollbar-width: auto;
+      scrollbar-color: auto;
+    }
+
+    .section-scroll-body::-webkit-scrollbar {
+      width: 0;
+    }
+
+    .section-scroll-body::-webkit-scrollbar-thumb {
+      background: transparent;
+    }
+
+    .content-section.home-slide .card-grid {
+      align-content: start;
+    }
+
+    #projects.home-slide .portfolio-grid,
+    #projects.home-slide .skill-layout,
+    #campus.home-slide .campus-grid,
+    #life.home-slide .campus-grid {
+      align-content: start;
+    }
+
+    #campus.home-slide .story-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #projects.home-slide .projects-showcase-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #projects.home-slide .projects-showcase-grid--triple {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #projects.home-slide .projects-showcase-grid.single-column {
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 1025px) {
+      .hero.home-slide .hero-inner {
+        padding: clamp(70px, 7vh, 82px) 0 clamp(18px, 2.2vh, 24px);
+        gap: clamp(18px, 1.9vw, 24px);
+        align-items: start;
+      }
+
+      .home-profile-panel {
+        align-self: start;
+        height: auto;
+        width: min(100%, clamp(260px, 36vh, 392px));
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: 0;
+      }
+
+      .home-story-column {
+        gap: clamp(16px, 1.5vw, 20px);
+      }
+
+      .home-story-column .story-panel:last-child {
+        flex: initial;
+      }
+
+      .profile-photo {
+        width: min(100%, clamp(260px, 36vh, 392px));
+        margin: 0;
+      }
+
+      .profile-body {
+        flex: 0 1 auto;
+        min-height: 0;
+        padding: 16px 0 2px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .profile-name h1 {
+        font-size: clamp(1.56rem, 0.72vw + 1rem, 2.12rem);
+      }
+
+      .profile-meta li {
+        font-size: clamp(0.95rem, 0.18vw + 0.9rem, 1.02rem);
+        line-height: 1.68;
+      }
+
+      .profile-skills {
+        margin-top: 16px;
+        padding-top: 18px;
+      }
+
+      .profile-skills h2 {
+        font-size: clamp(1.08rem, 0.28vw + 1rem, 1.2rem);
+        margin-bottom: 12px;
+      }
+
+      .profile-skill-pill {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+
+      .story-panel {
+        padding: clamp(20px, 1.6vw + 6px, 28px);
+      }
+
+      .story-heading h2 {
+        font-size: clamp(1.62rem, 0.82vw + 1.02rem, 2.08rem);
+      }
+
+      .story-panel p {
+        font-size: clamp(0.98rem, 0.2vw + 0.92rem, 1.05rem);
+        line-height: 1.7;
+      }
+
+      .story-panel p + p {
+        margin-top: 10px;
+      }
+
+      .story-highlight {
+        font-size: clamp(1.08rem, 0.28vw + 1rem, 1.2rem);
+      }
+
+      .home-strength-list {
+        gap: 16px;
+      }
+
+      .strength-entry {
+        gap: 0;
+        padding-bottom: 16px;
+      }
+
+      .strength-content h3 {
+        font-size: clamp(1rem, 0.2vw + 0.96rem, 1.08rem);
+        line-height: 1.54;
+      }
+
+      .strength-content p {
+        font-size: clamp(0.94rem, 0.16vw + 0.9rem, 1rem);
+        line-height: 1.64;
+      }
+    }
+
+    @media (max-width: 1280px) {
+      .hero.home-slide .hero-inner {
+        width: calc(100vw - 24px);
+        gap: 16px;
+      }
+
+      .home-profile-panel {
+        padding: 0;
+      }
+
+      #campus.home-slide .campus-grid,
+      #life.home-slide .campus-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .life-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .hero.home-slide .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 80px 0 18px;
+      }
+
+      .home-profile-panel {
+        position: relative;
+        top: auto;
+      }
+
+      .top-nav {
+        left: 12px;
+        right: 12px;
+        max-width: none;
+      }
+
+      #projects.home-slide .portfolio-grid,
+      #projects.home-slide .skill-layout,
+      #campus.home-slide .campus-grid,
+      #life.home-slide .campus-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .media-slot-grid--support {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .media-slot-grid--photo {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #projects.home-slide .portfolio-card.large {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero.home-slide .hero-inner {
+        width: calc(100vw - 16px);
+        padding: 70px 0 10px;
+      }
+
+      .home-profile-panel {
+        padding: 0;
+        border-radius: 0;
+      }
+
+      .profile-body {
+        padding: 14px 4px 2px;
+      }
+
+      .projects-carousel-footer {
+        gap: 10px;
+        width: min(100%, 232px);
+      }
+
+      .profile-meta li {
+        grid-template-columns: 18px minmax(0, 1fr);
+        gap: 10px;
+      }
+
+      .skill-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .story-panel {
+        padding: 18px 16px;
+        border-radius: 22px;
+      }
+
+      .story-panel p,
+      .strength-content p {
+        font-size: 0.95rem;
+        line-height: 1.78;
+      }
+
+      .strength-entry {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .content-section.home-slide {
+        padding: 68px 8px 8px;
+      }
+
+      .content-section.home-slide .section-card {
+        width: calc(100vw - 16px);
+        height: auto;
+        max-height: none;
+        padding: 16px 12px;
+      }
+
+      .projects-showcase-card {
+        padding: 18px 16px;
+      }
+
+      .projects-carousel-frame {
+        padding-inline: 20px;
+      }
+
+      .projects-carousel-button {
+        width: 36px;
+        height: 36px;
+      }
+
+      .projects-showcase-head {
+        flex-direction: column;
+      }
+
+      .media-slot-grid--support,
+      .media-slot-grid--photo {
+        grid-template-columns: 1fr;
+      }
+
+      .media-slot-grid--photo {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .media-slot {
+        min-height: 104px;
+      }
+
+      .travel-timeline-item {
+        grid-template-columns: 58px minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .travel-timeline-item:not(:last-child)::before {
+        left: 28px;
+        top: 64px;
+      }
+
+      .travel-photo-slot {
+        width: 58px;
+        height: 58px;
+        font-size: 0.76rem;
+      }
+
+      .travel-entry {
+        min-height: 58px;
+      }
+
+      .travel-timeline-horizontal {
+        --travel-node-size: 58px;
+        --travel-col-gap: 8px;
+        --travel-row-gap: 14px;
+        column-gap: 8px;
+        row-gap: 14px;
+        padding: 8px 0 6px;
+      }
+
+      .travel-timeline-horizontal .travel-timeline-item {
+        gap: 8px;
+        min-height: calc(var(--travel-node-size) + 40px);
+      }
+
+      .travel-timeline-horizontal .travel-photo-slot {
+        font-size: 0.76rem;
+      }
+
+      .travel-timeline-horizontal .travel-entry {
+        min-height: auto;
+      }
+
+      .travel-timeline-horizontal .travel-order {
+        font-size: 0.72rem;
+      }
+
+      .travel-timeline-horizontal .travel-entry strong {
+        font-size: 0.88rem;
       }
     }
   </style>
@@ -648,292 +2219,777 @@
 <body>
   <nav class="top-nav" aria-label="页面导航">
     <a href="#home" class="nav-link active">首页</a>
-    <a href="#education" class="nav-link">学历</a>
-    <a href="#experience" class="nav-link">实习</a>
-    <a href="#portfolio" class="nav-link">作品集</a>
-    <a href="#skills" class="nav-link">能力</a>
-    <a href="#honors" class="nav-link">荣誉</a>
+    <a href="#experience" class="nav-link">实习经历</a>
+    <a href="#projects" class="nav-link">项目经历</a>
+    <a href="#campus" class="nav-link">校园经历</a>
+    <a href="#life" class="nav-link">生活与爱好</a>
   </nav>
 
-  <section class="hero" id="home">
-    <div class="hero-stage">
-      <div class="hero-bg" id="heroBg"></div>
-      <div class="hero-overlay"></div>
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <div class="identity-chip">
-            <div class="avatar-frame" id="avatarFrame" aria-label="个人头像展示区域">
-              <img class="avatar-image" id="avatarImage" alt="李新新个人头像">
-            </div>
-            <div class="identity-text">
-              <strong>李新新</strong>
-              <span>AI产品经理</span>
-            </div>
-          </div>
-
-          <h1 class="hero-title">
-            <span>李新新</span>
-            <span>AI产品经理</span>
-          </h1>
-
-          <p class="hero-subtitle">聚焦 AI 搜索、AI Agent、评测优化与产品落地。</p>
-
-          <div class="contact-row">
-            <div class="contact-pill">电话：18801071575</div>
-            <div class="contact-pill">邮箱：xinxinli087@163.com</div>
-          </div>
-
-          <div class="tag-row">
-            <div class="tag-pill">主观能动性强</div>
-            <div class="tag-pill">执行力强</div>
-            <div class="tag-pill">逻辑清晰</div>
-            <div class="tag-pill">擅长团队协作</div>
-          </div>
-        </div>
-
-        <div class="showcase-window" id="showcaseWindow" aria-label="首页滚动展示">
-          <div class="window-head">
-            <span class="window-dot"></span>
-            <span class="window-dot"></span>
-            <span class="window-dot"></span>
-          </div>
-          <div class="window-body">
-            <article class="home-slide active" data-slide="0">
-              <h2 class="slide-heading">学历背景</h2>
-              <div class="slide-grid">
-                <article class="slide-card">
-                  <strong>北京邮电大学</strong>
-                  <span>计算机科学与技术 - 硕士</span>
-                  <span>2024.9 - 2027.6</span>
-                </article>
-                <article class="slide-card">
-                  <strong>贵州省长顺县罗湖希望小学</strong>
-                  <span>西部计划大学生支教团成员</span>
-                  <span>2023.7 - 2024.7</span>
-                </article>
-                <article class="slide-card">
-                  <strong>北京邮电大学</strong>
-                  <span>电子信息科学与技术（+AI）- 本科</span>
-                  <span>2019.9 - 2023.6</span>
-                </article>
+  <main class="home-scroll-container" id="homeScrollContainer">
+    <section class="hero home-slide" id="home">
+      <div class="hero-stage">
+        <div class="hero-bg" id="heroBg"></div>
+        <div class="hero-overlay"></div>
+        <div class="home-scroll-body">
+          <div class="hero-inner">
+            <aside class="home-profile-panel">
+              <div class="profile-photo" id="avatarFrame" aria-label="李新新个人照片">
+                <img class="profile-photo-image" id="avatarImage" alt="李新新个人头像">
               </div>
-            </article>
-
-            <article class="home-slide" data-slide="1">
-              <h2 class="slide-heading">实习经历</h2>
-              <div class="slide-grid">
-                <article class="slide-card">
-                  <strong>高德地图 - AI Agent业务部</strong>
-                  <p>AI搜索产品实习生</p>
-                  <p>评测效率提升16倍 / DAU增长200w+</p>
-                </article>
-                <article class="slide-card">
-                  <strong>百度 - 大模型产品部</strong>
-                  <p>AI策略产品实习生</p>
-                  <p>长任务首Token等待时间降低70% / 评估效率提升约75%</p>
-                </article>
-                <article class="slide-card">
-                  <strong>小冰跃动科技有限公司</strong>
-                  <p>AI应用型产品实习生</p>
-                  <p>桌面AI助手0-1建设 / 两天内获取500+首批用户</p>
-                </article>
-              </div>
-            </article>
-
-            <article class="home-slide" data-slide="2">
-              <h2 class="slide-heading">作品集</h2>
-              <article class="slide-card">
-                <strong>第五届中国移动“梧桐杯”数智创新大赛——基于多源信令数据的校园商业选址与诊断智能体</strong>
-                <ul class="slide-list">
-                  <li>围绕校园周边商铺“选址盲目、经营归因难”痛点，设计商业选址与诊断智能体。</li>
-                  <li>融合多源信令、POI与用户画像数据，构建“选址推荐 + 经营诊断”双场景闭环。</li>
-                  <li>获得北京赛区 AI 智能体赛道第一名。</li>
+              <div class="profile-body">
+                <div class="profile-name">
+                  <span class="profile-badge" aria-hidden="true">👩</span>
+                  <h1>李新新 | LI XINXIN</h1>
+                </div>
+                <ul class="profile-meta">
+                  <li>
+                    <span class="profile-meta-icon" aria-hidden="true">🎓</span>
+                    <span>北京邮电大学 · 计算机科学与技术（硕士）</span>
+                  </li>
+                  <li>
+                    <span class="profile-meta-icon" aria-hidden="true">🎯</span>
+                    <span>AI 产品经理</span>
+                  </li>
+                  <li>
+                    <span class="profile-meta-icon" aria-hidden="true">🏷️</span>
+                    <span>AI Agent ｜ AI 搜索 ｜ Agent评测 ｜ 摄影与生活记录</span>
+                  </li>
+                  <li>
+                    <span class="profile-meta-icon" aria-hidden="true">📞</span>
+                    <span>18801071575</span>
+                  </li>
+                  <li>
+                    <span class="profile-meta-icon" aria-hidden="true">📧</span>
+                    <span>xinxinli087@163.com</span>
+                  </li>
                 </ul>
+                <div class="profile-skills">
+                  <h2>Skills</h2>
+                  <div class="skill-group">
+                    <div class="skill-row">
+                      <strong>技术</strong>
+                      <div class="skill-pill-list">
+                        <span class="profile-skill-pill">Python</span>
+                        <span class="profile-skill-pill">SQL</span>
+                        <span class="profile-skill-pill">Java</span>
+                      </div>
+                    </div>
+                    <div class="skill-row">
+                      <strong>产品</strong>
+                      <div class="skill-pill-list">
+                        <span class="profile-skill-pill">Figma</span>
+                        <span class="profile-skill-pill">Axure</span>
+                        <span class="profile-skill-pill">Visio</span>
+                      </div>
+                    </div>
+                    <div class="skill-row">
+                      <strong>设计</strong>
+                      <div class="skill-pill-list">
+                        <span class="profile-skill-pill">PS</span>
+                        <span class="profile-skill-pill">PR</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </aside>
+
+            <div class="home-story-column">
+              <article class="story-panel reveal" data-reveal>
+                <div class="story-heading">
+                  <span class="story-icon" aria-hidden="true">🧭</span>
+                  <h2>理性产品人</h2>
+                </div>
+                <p>我是一个在 AI 产品方向持续探索的人。</p>
+                <p>相比“做功能”，我更关注如何让技术真正被人理解、被人使用。</p>
+                <p>在复杂系统中，我习惯先建立结构，再推动落地；</p>
+                <p>在团队协作中，我更倾向于成为那个连接不同角色、让事情向前推进的人。</p>
               </article>
-            </article>
-          </div>
 
-          <div class="slide-dots" id="slideDots" aria-hidden="true">
-            <span class="active"></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+              <article class="story-panel reveal" data-reveal>
+                <div class="story-heading">
+                  <span class="story-icon" aria-hidden="true">💬</span>
+                  <h2>有温度的推动者</h2>
+                </div>
+                <p>我习惯在人与人之间建立连接，也擅长在复杂环境中推动事情向前发展。</p>
+                <p>在团队中，我往往承担协调与推进的角色——不是最强势的，但会是那个让事情落地的人。</p>
+                <p class="story-highlight">相比个人突破，我更在意：<br>👉 让一群人一起把一件事情做好</p>
+              </article>
 
-  <main class="page-main">
-    <section class="content-section" id="education">
-      <div class="section-card reveal" data-reveal>
-        <div class="section-head">
-          <h2>学历背景</h2>
-          <div class="section-side">北京邮电大学本硕经历</div>
-        </div>
-        <div class="card-grid">
-          <article class="edu-card">
-            <div class="card-top">
-              <div class="card-title">北京邮电大学｜计算机科学与技术 - 硕士</div>
-              <div class="date-pill">2024.9 - 2027.6</div>
+              <article class="story-panel reveal" data-reveal>
+                <div class="story-heading">
+                  <span class="story-icon" aria-hidden="true">💎</span>
+                  <h2>核心优势</h2>
+                </div>
+                <div class="home-strength-list">
+                  <div class="strength-entry">
+                    <div class="strength-content">
+                      <h3>复杂系统拆解与产品推进能力</h3>
+                      <p>- 在高德 AI 搜索项目中，主导评测体系搭建与参与 Agent 架构升级<br>- 推动评测分从 66.72 → 83.84，显著提升系统能力与迭代效率</p>
+                    </div>
+                  </div>
+                  <div class="strength-entry">
+                    <div class="strength-content">
+                      <h3>跨团队协同与问题解决能力</h3>
+                      <p>- 联合算法 / 工程团队推进 20+ 核心问题修复<br>- 在复杂协作中承担“连接角色”，推动技术与产品目标对齐</p>
+                    </div>
+                  </div>
+                  <div class="strength-entry">
+                    <div class="strength-content">
+                      <h3>用户体验驱动的产品思维</h3>
+                      <p>- 在百度与小冰项目中优化 AI 任务链路体验<br>- 将首 Token 等待时间降低 70%，提升用户使用流畅度</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
             </div>
-          </article>
-          <article class="edu-card">
-            <div class="card-top">
-              <div class="card-title">贵州省长顺县罗湖希望小学｜西部计划大学生支教团成员</div>
-              <div class="date-pill">2023.7 - 2024.7</div>
-            </div>
-          </article>
-          <article class="edu-card">
-            <div class="card-top">
-              <div class="card-title">北京邮电大学｜电子信息科学与技术（+AI）- 本科</div>
-              <div class="date-pill">2019.9 - 2023.6</div>
-            </div>
-          </article>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="content-section" id="experience">
+    <section class="content-section home-slide" id="experience">
       <div class="section-card reveal" data-reveal>
         <div class="section-head">
           <h2>实习经历</h2>
-          <div class="section-side">高德地图 / 百度 / 小冰</div>
+          <div class="section-side">AI 搜索 / 超级智能体 / 桌面助手 / 具身智能</div>
         </div>
-        <div class="card-grid">
-          <article class="exp-card">
-            <div class="card-top">
-              <div class="card-title">高德地图 - AI Agent业务部｜小高老师（AI搜索产品实习生）</div>
-              <div class="date-pill">2025.12 - 2026.04</div>
+        <div class="section-scroll-body">
+          <div class="content-stack">
+            <p class="section-lead">我的实习经历覆盖 AI 搜索、超级智能体、桌面助手与具身智能，重点沉淀了评测设计、架构升级、体验优化与跨团队推进能力。</p>
+            <div class="projects-carousel-shell experience-carousel-shell">
+              <div class="projects-carousel-frame">
+                <div class="projects-carousel-track" id="experienceCarousel" aria-label="实习经历轮播">
+                  <article class="experience-slide">
+                    <article class="exp-card">
+                      <div class="card-top">
+                        <div class="card-title">高德地图 - AI Agent业务部｜小高老师（AI搜索产品实习生）</div>
+                        <div class="date-pill">2025.12 - 2026.04</div>
+                      </div>
+                      <ul class="detail-list">
+                        <li>深度参与 AI 搜索评测全流程，推动评测平台优化与自动化归因模块落地，形成“抽样-自动化评分-交叉评审”闭环。</li>
+                        <li>基于线上典型 badcase 归因，联合算法与工程推进 20+ AI搜索核心问题修复，带动自动化与人工一致性提升 10%，评测得分由 66.72 提升至 83.84。</li>
+                        <li>推动 Agent 2.0 并行架构升级及 AI 融合页、未登录可用 AI 语音等增长需求上线，首正文时间缩短 1 秒，带动 DAU 增长 200w+。</li>
+                      </ul>
+                      <div class="tag-grid">
+                        <span class="tag">评测效率提升16倍</span>
+                        <span class="tag">83.84 分</span>
+                        <span class="tag">DAU +200w</span>
+                      </div>
+                    </article>
+                  </article>
+
+                  <article class="experience-slide">
+                    <article class="exp-card">
+                      <div class="card-top">
+                        <div class="card-title">百度 - 大模型产品部｜文心一言超级智能体（AI策略产品实习生）</div>
+                        <div class="date-pill">2025.09 - 2025.12</div>
+                      </div>
+                      <ul class="detail-list">
+                        <li>参与超级智能体 Xgent 从 0-1 的能力规划与交互设计，围绕长任务、多步骤、多工具协作梳理“规划-执行-反思-交付”任务链路。</li>
+                        <li>推动 10+ 项长任务能力与体验优化落地，解决计划生成质量、执行稳定性与交付可用性问题，首Token等待时间降低 70%。</li>
+                        <li>独立构建 Xgent 多维评估集与 Benchmark，设计自动化脚本批量调用模型 API，评估效率提升约 75%，核心指标从 2.51 分升至 2.76 分。</li>
+                      </ul>
+                      <div class="tag-grid">
+                        <span class="tag">5+类典型任务</span>
+                        <span class="tag">首Token -70%</span>
+                        <span class="tag">评估效率 +75%</span>
+                      </div>
+                    </article>
+                  </article>
+
+                  <article class="experience-slide">
+                    <article class="exp-card">
+                      <div class="card-top">
+                        <div class="card-title">小冰跃动科技有限公司（前微软小冰）｜AI应用型产品实习生</div>
+                        <div class="date-pill">2025.04 - 2025.09</div>
+                      </div>
+                      <ul class="detail-list">
+                        <li>参与【超级小冰】桌面 AI 助手从 0-1 的产品设计，负责“问答”与“会议旁听”两大核心功能，并提出“屏幕圈画指引”的交互方案。</li>
+                        <li>构建评测集合并持续进行 Prompt 调优，同时支撑 Claude 到豆包的模型迁移，在保持体验的同时显著降低调用成本。</li>
+                        <li>搭建并维护产品知识库，协同研发推进体验优化需求落地，产品上线后两天获取 500+ 首批用户。</li>
+                      </ul>
+                      <div class="tag-grid">
+                        <span class="tag">桌面AI助手</span>
+                        <span class="tag">Claude -&gt; 豆包</span>
+                        <span class="tag">2 天 500+ 用户</span>
+                      </div>
+                    </article>
+                  </article>
+
+                  <article class="experience-slide">
+                    <article class="exp-card">
+                      <div class="card-top">
+                        <div class="card-title">南湖研究院｜具身智能产品实习生</div>
+                        <div class="date-pill">2024.09 - 2025.02</div>
+                      </div>
+                      <ul class="detail-list">
+                        <li>参与具身智能机器人产品从仿真控制（V0）到真实环境落地（V3）的全链路规划，协助设计路线图并明确任务成功率 &gt;90% 等阶段目标。</li>
+                        <li>参与 Sim2Real / Real2Sim 策略设计，支持仿真与真实数据协同及大模型训练，推动“仿真 -&gt; 真实世界”的能力迁移。</li>
+                        <li>定义任务成功率、泛化能力等关键指标，推动数据采集与实验验证流程，用数据驱动研究成果工程化落地。</li>
+                      </ul>
+                      <div class="tag-grid">
+                        <span class="tag">V0 -&gt; V3</span>
+                        <span class="tag">Sim2Real</span>
+                        <span class="tag">任务成功率 &gt;90%</span>
+                      </div>
+                    </article>
+                  </article>
+                </div>
+              </div>
+              <div class="projects-carousel-footer">
+                <button class="projects-carousel-button prev" id="experiencePrev" type="button" aria-label="查看上一段实习经历">‹</button>
+                <div class="projects-indicators" id="experienceIndicators" aria-label="实习经历切换">
+                  <button class="projects-indicator active" type="button" data-experience-index="0" aria-label="查看高德地图实习经历"></button>
+                  <button class="projects-indicator" type="button" data-experience-index="1" aria-label="查看百度实习经历"></button>
+                  <button class="projects-indicator" type="button" data-experience-index="2" aria-label="查看小冰实习经历"></button>
+                  <button class="projects-indicator" type="button" data-experience-index="3" aria-label="查看南湖研究院实习经历"></button>
+                </div>
+                <button class="projects-carousel-button next" id="experienceNext" type="button" aria-label="查看下一段实习经历">›</button>
+              </div>
             </div>
-            <ul class="detail-list">
-              <li><strong>AI搜索评测体系搭建与迭代优化：</strong>深度参与评测全流程，推动评测平台优化、落地自动化归因模块，评测效率提升16倍；推动“抽样-自动化评分-交叉评审”评测闭环，提升问题识别、归因与迭代验证效率。</li>
-              <li>基于线上典型 badcase 归因，联合算法/工程推进20+ AI搜索核心问题修复；优化评测标准，带动自动化与人工一致性提升10%；推动评测得分由66.72提升至83.84（目标85）。</li>
-              <li><strong>AI搜索Agent架构升级：</strong>推动2.0并行框架升级，落地统一意图入口、Graph/DAG并行执行、Summary收口机制；上线后评测分较1.0提升5.22分，首正文时间缩短1秒。</li>
-              <li><strong>AI搜索用户增长需求落地：</strong>落地AI融合页及未登录可用AI语音等需求；上线后共带动DAU增长200w+。</li>
-            </ul>
-          </article>
-
-          <article class="exp-card">
-            <div class="card-top">
-              <div class="card-title">百度 - 大模型产品部｜文心一言超级智能体（AI策略产品实习生）</div>
-              <div class="date-pill">2025.09 - 2025.12</div>
-            </div>
-            <ul class="detail-list">
-              <li><strong>超级智能体Xgent 0-1能力规划：</strong>参与从0-1能力规划与交互设计，围绕长任务、多步骤、多工具协作等场景梳理“规划-执行-反思-交付”任务链路，抽象5+类典型任务并构建能力框架。</li>
-              <li><strong>AI agent长链路任务与体验优化：</strong>推动10+项能力与体验优化落地；长任务首Token等待时间降低70%。</li>
-              <li><strong>典型任务集搭建与AI能力优化：</strong>独立构建Xgent多维评估集与Benchmark，制定标准化评分规则；设计自动化脚本批量调用模型API，评估效率提升约75%；推动核心指标3分量表评分从2.51分升至2.76分。</li>
-            </ul>
-          </article>
-
-          <article class="exp-card">
-            <div class="card-top">
-              <div class="card-title">小冰跃动科技有限公司（前微软小冰）｜AI应用型产品实习生</div>
-              <div class="date-pill">2025.04 - 2025.09</div>
-            </div>
-            <ul class="detail-list">
-              <li><strong>超级小冰0-1产品建设与功能设计：</strong>参与【超级小冰】桌面AI助手从0-1的产品设计，完成竞品分析并提出差异化设计方向；参与“问答”与“会议旁听”两大核心功能设计，提出“屏幕圈画指引”的创新交互方案。</li>
-              <li><strong>Agent优化与模型迁移调优：</strong>构建评测集合，基于典型问题进行Prompt设计与调优；同时支撑Claude→豆包模型迁移，在保持体验的同时显著降低调用成本。</li>
-              <li><strong>知识库建设与产品落地：</strong>搭建并维护产品知识库，支撑内部资料问答与多场景交互；协同研发推进体验优化需求落地，推动产品落地，两天内获取500+首批用户。</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="content-section" id="portfolio">
-      <div class="section-card reveal" data-reveal>
-        <div class="section-head">
-          <h2>作品集</h2>
-          <div class="section-side">项目经历</div>
-        </div>
-        <div class="portfolio-grid">
-          <article class="portfolio-card large">
-            <div class="card-title">第五届中国移动“梧桐杯”数智创新大赛——基于多源信令数据的校园商业选址与诊断智能体</div>
-            <p class="card-text" style="margin-top: 12px;">
-              围绕校园周边商铺“选址盲目、经营归因难”痛点，设计融合多源信令、POI与用户画像数据的商业选址与诊断智能体，
-              构建“选址推荐+经营诊断”双场景闭环。
-            </p>
-            <div class="portfolio-badge">北京赛区 AI 智能体赛道第一名</div>
-          </article>
-          <article class="portfolio-card">
-            <div class="card-title">项目内容</div>
-            <p class="card-text" style="margin-top: 12px;">
-              推动大语言模型与Python数据分析引擎结合，搭建从需求理解、任务分发、量化评估到策略生成的端到端流程。
-            </p>
-          </article>
-          <article class="portfolio-card">
-            <div class="card-title">指标设计</div>
-            <p class="card-text" style="margin-top: 12px;">
-              设计客流潜力、客群匹配度等核心指标体系，用于支撑商业选址推荐与经营诊断分析。
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="content-section" id="skills">
-      <div class="section-card reveal" data-reveal>
-        <div class="section-head">
-          <h2>个人能力</h2>
-          <div class="section-side">通用技能 / 个人评价</div>
-        </div>
-        <div class="skill-layout">
-          <article class="skill-card">
-            <div class="card-title">通用技能</div>
-            <div class="tag-grid">
-              <span class="tag">SQL</span>
-              <span class="tag">Java</span>
-              <span class="tag">Python</span>
-              <span class="tag">Figma</span>
-              <span class="tag">Axure</span>
-              <span class="tag">Ps</span>
-              <span class="tag">Pr</span>
-              <span class="tag">visio</span>
-            </div>
-          </article>
-          <article class="skill-card">
-            <div class="card-title">个人评价</div>
-            <ul class="traits-list">
-              <li>极强的主观能动性</li>
-              <li>执行力强</li>
-              <li>抗压能力</li>
-              <li>性格开朗，擅长团队协作</li>
-              <li>逻辑清晰</li>
-              <li>做事认真负责</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="content-section" id="honors">
-      <div class="section-card reveal" data-reveal>
-        <div class="section-head">
-          <h2>荣誉奖项</h2>
-          <div class="section-side">竞赛成果</div>
-        </div>
-        <article class="honor-card">
-          <div class="card-top">
-            <div class="card-title">第五届中国移动“梧桐杯”数智创新大赛</div>
-            <div class="date-pill">北京赛区 AI 智能体赛道第一名</div>
           </div>
-          <p class="card-text">项目名称：基于多源信令数据的校园商业选址与诊断智能体。</p>
-        </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section home-slide" id="projects">
+      <div class="section-card reveal" data-reveal>
+        <div class="section-head">
+          <h2>项目经历</h2>
+        </div>
+        <div class="section-scroll-body">
+          <div class="content-stack">
+            <p class="section-lead">围绕真实用户场景、低成本多模态验证和竞赛实战三类项目持续做产品探索，把想法转成可演示、可验证、可迭代的方案。</p>
+
+            <div class="projects-carousel-shell">
+              <div class="projects-carousel-frame">
+                <div class="projects-carousel-track" id="projectsCarousel" aria-label="项目经历轮播">
+                  <article class="projects-slide">
+                    <div class="projects-showcase-card">
+                      <div class="projects-showcase-head">
+                        <div>
+                          <div class="projects-showcase-kicker">01 / 03</div>
+                          <h3>Vibe Coding</h3>
+                          <p>围绕求职、旅行与个人表达场景，把真实痛点快速做成可验证的小产品。</p>
+                        </div>
+                        <div class="date-pill">3 个项目</div>
+                      </div>
+                      <div class="projects-showcase-grid projects-showcase-grid--triple">
+                        <article class="project-showcase-item">
+                          <div class="card-top">
+                            <div class="card-title">面试大王｜面试记录与复盘网站</div>
+                            <div class="project-chip">Coze 编程</div>
+                          </div>
+                          <p class="card-text">面向求职者的面试记录与复盘工具，帮助用户沉淀面试过程并形成可复用的经验库。</p>
+                          <div class="project-section-block">
+                            <div class="project-section-label">核心功能</div>
+                            <ul class="project-detail-list">
+                              <li>记录公司、岗位、轮次、问题与复盘总结。</li>
+                              <li>通过结构化记录降低重复准备成本，帮助用户快速定位短板。</li>
+                            </ul>
+                          </div>
+                          <div class="project-section-block">
+                            <div class="project-section-label">后续优化方向</div>
+                            <ul class="project-detail-list">
+                              <li>识别邀约或聊天截图中的关键信息，一键生成面试记录。</li>
+                            </ul>
+                          </div>
+                          <div class="resource-row">
+                            <a class="resource-link" href="https://j9t6xysnrc.coze.site/" target="_blank" rel="noreferrer">项目链接</a>
+                            <a class="resource-link" href="https://my.feishu.cn/wiki/H8uawCzEAiLPe6kbnsEcAJNKnTg?fromScene=spaceOverview" target="_blank" rel="noreferrer">PRD</a>
+                          </div>
+                          <div class="tag-grid">
+                            <span class="tag">求职场景</span>
+                            <span class="tag">主动辅助</span>
+                            <span class="tag">信息采集</span>
+                          </div>
+                        </article>
+
+                        <article class="project-showcase-item">
+                          <div class="card-top">
+                            <div class="card-title">特价机票发现平台｜低价航班智能发现工具</div>
+                            <div class="project-chip">NoCode 编程</div>
+                          </div>
+                          <p class="card-text">帮助价格敏感型旅行用户快速发现低价航班，降低多平台比价成本。</p>
+                          <div class="project-section-block">
+                            <div class="project-section-label">核心功能</div>
+                            <ul class="project-detail-list">
+                              <li>按目的地、价格、时间等维度筛选低价机票。</li>
+                              <li>提升低价航班发现效率，缩短旅行决策时间。</li>
+                            </ul>
+                          </div>
+                          <div class="project-section-block">
+                            <div class="project-section-label">后续优化方向</div>
+                            <ul class="project-detail-list">
+                              <li>接入真实 OTA 数据，并叠加个性化低价提醒。</li>
+                            </ul>
+                          </div>
+                          <div class="resource-row">
+                            <a class="resource-link" href="https://low-cost-seeker-app.nocode.host" target="_blank" rel="noreferrer">项目链接</a>
+                            <a class="resource-link" href="https://my.feishu.cn/wiki/PczuwdpDUiUDdrk9nUUcxUganUb?fromScene=spaceOverview" target="_blank" rel="noreferrer">PRD</a>
+                          </div>
+                          <div class="tag-grid">
+                            <span class="tag">旅行决策</span>
+                            <span class="tag">真实数据接入</span>
+                            <span class="tag">低价发现</span>
+                          </div>
+                        </article>
+
+                        <article class="project-showcase-item">
+                          <div class="card-top">
+                            <div class="card-title">个人网站｜自我介绍网站</div>
+                            <div class="project-chip">Cursor 编程</div>
+                          </div>
+                          <p class="card-text">围绕个人表达与经历展示，用原生 HTML / CSS / JavaScript 持续迭代一个可在桌面端与移动端自适应的个人网站。</p>
+                          <div class="project-section-block">
+                            <div class="project-section-label">核心功能</div>
+                            <ul class="project-detail-list">
+                              <li>整合首页、实习、项目、校园与生活内容，形成横向滑屏式浏览体验。</li>
+                              <li>持续优化视觉风格、信息结构、图片展示与响应式适配效果。</li>
+                            </ul>
+                          </div>
+                          <div class="project-section-block">
+                            <div class="project-section-label">当前进展</div>
+                            <ul class="project-detail-list">
+                              <li>已基于 Cursor 完成多轮页面搭建与交互迭代，后续需持续补充作品集/经历等内容，同时优化各部分美观度。</li>
+                            </ul>
+                          </div>
+                          <div class="resource-row">
+                            <span class="resource-link resource-link-placeholder">项目链接（预留）</span>
+                            <a class="resource-link" href="https://my.feishu.cn/wiki/X1lPwerPnisAz3kwX0tcllMJnQe?fromScene=spaceOverview" target="_blank" rel="noreferrer">PRD</a>
+                          </div>
+                          <div class="tag-grid">
+                            <span class="tag">个人表达</span>
+                            <span class="tag">响应式设计</span>
+                            <span class="tag">Cursor</span>
+                          </div>
+                        </article>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="projects-slide">
+                    <div class="projects-showcase-card">
+                      <div class="projects-showcase-head">
+                        <div>
+                          <div class="projects-showcase-kicker">02 / 03</div>
+                          <h3>Coze 多模态 Agent搭建</h3>
+                          <p>以低成本方式验证图文和视频生成链路，积累多模态内容交付经验。</p>
+                        </div>
+                        <div class="date-pill">2 个方向</div>
+                      </div>
+                      <div class="projects-showcase-grid">
+                        <article class="project-showcase-item">
+                          <div class="card-top">
+                            <div class="card-title">小红书内容生成器</div>
+                            <div class="project-chip">图片生成</div>
+                          </div>
+                          <p class="card-text">围绕小红书内容场景，验证从主题输入到视觉结果输出的图片生成链路。</p>
+                          <div class="media-slot project-media-slot has-image" style="--slot-position: center top;">
+                            <img class="slot-image" src="coze图片生成.png" alt="Coze 图片生成项目界面" loading="lazy">
+                            <span class="media-slot-label">Coze 图片生成</span>
+                            <span class="media-slot-note">项目图片占位预留</span>
+                          </div>
+                          <div class="project-section-block">
+                            <div class="project-section-label">关注点</div>
+                            <ul class="project-detail-list">
+                              <li>验证平台风格化视觉表达能力。</li>
+                              <li>关注主题理解、画面调性和传播感的一致性。</li>
+                            </ul>
+                          </div>
+                          <div class="tag-grid">
+                            <span class="tag">图片生成</span>
+                            <span class="tag">平台风格</span>
+                            <span class="tag">内容表达</span>
+                          </div>
+                        </article>
+
+                        <article class="project-showcase-item">
+                          <div class="card-top">
+                            <div class="card-title">心理视频生成器</div>
+                            <div class="project-chip">视频生成</div>
+                          </div>
+                          <p class="card-text">围绕情绪表达与叙事内容，验证从脚本到视频结果的生成体验。</p>
+                          <div class="media-slot project-media-slot project-media-slot--video has-image" style="--slot-position: center 50%;">
+                            <img class="slot-image" src="coze视频生成.png?refresh=20260427" alt="Coze 视频生成项目界面" loading="lazy">
+                            <span class="media-slot-label">Coze 视频生成</span>
+                            <span class="media-slot-note">项目图片占位预留</span>
+                          </div>
+                          <div class="project-section-block">
+                            <div class="project-section-label">关注点</div>
+                            <ul class="project-detail-list">
+                              <li>验证叙事节奏、画面表达与情绪传递的衔接效果。</li>
+                              <li>关注从主题设定到视频结果产出的完整体验。</li>
+                            </ul>
+                          </div>
+                          <div class="tag-grid">
+                            <span class="tag">视频生成</span>
+                            <span class="tag">叙事表达</span>
+                            <span class="tag">Agent 交付</span>
+                          </div>
+                        </article>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="projects-slide">
+                    <div class="projects-showcase-card">
+                      <div class="projects-showcase-head">
+                        <div>
+                          <div class="projects-showcase-kicker">03 / 03</div>
+                          <h3>竞赛经历｜校园商业选址智能体</h3>
+                          <p>围绕校园周边商铺选址与经营分析，构建数据分析 + 策略生成的智能体方案。</p>
+                        </div>
+                        <div class="date-pill">梧桐杯一等奖</div>
+                      </div>
+                      <div class="projects-showcase-grid single-column">
+                        <article class="project-showcase-item">
+                          <div class="card-top">
+                            <div class="card-title">第五届中国移动“梧桐杯”数智创新大赛｜校园商业选址智能体</div>
+                            <div class="project-chip">LLM + Python</div>
+                          </div>
+                          <p class="card-text">构建“选址推荐 + 经营诊断”系统，把校园商业场景中的选址与经营问题沉淀成可执行的智能体方案。</p>
+                          <div class="project-section-block">
+                            <div class="project-section-label">方案亮点</div>
+                            <ul class="project-detail-list">
+                              <li>形成“选址推荐 + 经营诊断”的双场景闭环。</li>
+                              <li>结合多源数据、LLM 与 Python 分析引擎，沉淀指标与策略生成流程。</li>
+                            </ul>
+                          </div>
+                          <div class="project-section-block">
+                            <div class="project-section-label">成果</div>
+                            <div class="tag-grid">
+                              <span class="tag">北京赛区 AI 智能体赛道第一名</span>
+                              <span class="tag">商业选址</span>
+                              <span class="tag">经营诊断</span>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+              <div class="projects-carousel-footer">
+                <button class="projects-carousel-button prev" id="projectsPrev" type="button" aria-label="查看上一个项目模块">‹</button>
+                <div class="projects-indicators" id="projectsIndicators" aria-label="项目模块切换">
+                  <button class="projects-indicator active" type="button" data-project-index="0" aria-label="查看 Vibe Coding"></button>
+                  <button class="projects-indicator" type="button" data-project-index="1" aria-label="查看 Coze 多模态 Agent搭建"></button>
+                  <button class="projects-indicator" type="button" data-project-index="2" aria-label="查看竞赛经历"></button>
+                </div>
+                <button class="projects-carousel-button next" id="projectsNext" type="button" aria-label="查看下一个项目模块">›</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section home-slide" id="campus">
+      <div class="section-card reveal" data-reveal>
+        <div class="section-head">
+          <h2>校园经历</h2>
+        </div>
+        <div class="section-scroll-body">
+          <div class="content-stack">
+            <p class="section-lead">学生工作阶段，我从内容创作者逐步走向团队组织者，在校园媒体运营、内容策划与活动支持中持续训练协作、传播和推进能力，也逐渐形成了“把人和事情连接起来”的工作方式：学会在多人协作中拆解任务、建立节奏、协调资源，也更习惯从用户视角判断什么内容值得被看见、被参与、被传播；这些经历也沉淀成后来做产品时的重要工作方式。</p>
+            <div class="tag-grid">
+              <span class="tag">任务拆解</span>
+              <span class="tag">协调资源</span>
+              <span class="tag">用户视角</span>
+              <span class="tag">传播判断</span>
+              <span class="tag">AI 产品方向</span>
+            </div>
+
+            <div class="subsection">
+              <div class="subsection-head">
+                <h3>学生工作</h3>
+              </div>
+              <div class="story-grid">
+                <article class="honor-card">
+                  <div class="card-title">北京邮电大学学生记者团｜总负责人</div>
+                  <p class="card-text" style="margin-top: 12px;">在北邮学生记者团的三年里，我从新媒体部门文案组一路成长为记者团总负责人，逐渐完成了从“内容创作者”到“团队组织者”的转变。</p>
+                  <ul class="detail-list">
+                    <li>记者团负责学校官方微博、官方微信公众号、官方抖音、官方 B 站等宣传媒体运营，内部设有记者部、影视部、新媒体部、编辑部等多个部门，整体规模约 500 人。</li>
+                    <li>在任期间，我主要负责记者团整体统筹规划、部门协作管理、内容选题策划，以及与老师、校内各部门的沟通对接。</li>
+                    <li>我参与并推动了校园街拍、邮苑节气、初雪系列等内容策划，统筹完成 50+ 篇官方微信推送，以及 20+ 次微博、抖音选题策划。</li>
+                  </ul>
+                  <p class="note-text">我印象最深的是“初雪推送”。它本身具有很强的时效性和情绪价值，需要在很短时间内完成拍摄、选片、文案、排版与发布；我需要协调记者部、影视部、新媒体部等多个部门分工与排班，在保证内容质量的同时尽可能抢占最佳传播时间窗口。</p>
+                  <p class="note-text"><strong>What I Learned：</strong>好的内容不只依赖灵感，更依赖明确分工、稳定节奏和多部门协同；在高时效任务里，快速判断优先级并推动大家同步行动，往往比单点创意更重要。</p>
+                  <div class="tag-grid">
+                    <span class="tag">500 人规模</span>
+                    <span class="tag">50+ 官方微信推送</span>
+                    <span class="tag">20+ 微博/抖音选题</span>
+                    <span class="tag">初雪推送</span>
+                  </div>
+                </article>
+                <article class="honor-card">
+                  <div class="card-title">团委新媒体中心｜副主任</div>
+                  <p class="card-text" style="margin-top: 12px;">在团委新媒体中心，我主要负责【北邮青年】微信公众号、抖音、B 站等平台的内容运营与选题策划，参与学校团委宣传工作的整体执行。</p>
+                  <ul class="detail-list">
+                    <li>负责公众号推送的选题、文案、排版及发布节奏把控，曾统筹策划多篇阅读量 10W+ 的内容。</li>
+                    <li>其中，“一周 CP”活动通过轻量互动形式连接校内同学，吸引千人规模参与，显著提升了账号的校园影响力和用户活跃度。</li>
+                  </ul>
+                  <p class="note-text">“一周 CP”让我更明显地感受到，校园内容如果只是单向传达信息，往往很难形成真正的互动；只有把选题做成同学愿意参与、愿意表达的形式，内容才会真正被看见。</p>
+                  <p class="note-text"><strong>What I Learned：</strong>有效传播不是“通知到位”就结束了，而是要从受众真实关心的话题出发设计表达方式；当内容降低参与门槛、保留情绪连接时，影响力和活跃度才会自然增长。</p>
+                  <div class="tag-grid">
+                    <span class="tag">10W+ 内容</span>
+                    <span class="tag">一周 CP</span>
+                    <span class="tag">千人参与</span>
+                    <span class="tag">北邮青年</span>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section home-slide" id="life">
+      <div class="section-card reveal" data-reveal>
+        <div class="section-head">
+          <h2>生活与爱好</h2>
+        </div>
+        <div class="section-scroll-body">
+          <div class="content-stack">
+            <p class="section-lead">支教、摄影和旅行，是我离真实生活最近的三个入口。它们让我一直保留对人、情绪与现场的感受力，也让我在做产品时更在意“具体的人”，而不只是抽象需求。</p>
+            <div class="projects-carousel-shell">
+              <div class="projects-carousel-frame">
+                <div class="projects-carousel-track" id="lifeCarousel" aria-label="生活与爱好轮播">
+                  <article class="life-slide">
+                    <div class="projects-showcase-card life-showcase-card">
+                      <div class="projects-showcase-head">
+                        <div>
+                          <div class="projects-showcase-kicker">01 / 03</div>
+                          <h3>我的支教生活</h3>
+                          <p>贵州省长顺县罗湖希望小学｜西部计划大学生支教团成员。贵州长顺这一年，让我更贴近课堂、孩子和具体日常，也重新理解了陪伴与表达的意义。</p>
+                        </div>
+                      </div>
+                      <div class="life-card">
+                        <div class="life-card-copy">
+                          <p class="card-text">在贵州省长顺县罗湖希望小学参与支教的那一年，是我和真实生活距离很近的一段时间。比起“去做一件有意义的事”，我更常感受到的是，先走进孩子们每天的课堂和日常，再慢慢学会稳定、耐心地陪伴。</p>
+                          <p class="card-text">很多瞬间都没有宏大的叙事，更多是普通而具体的相处：课堂、课后交流和校园活动里的点滴，也是在这些细碎日常里，我重新理解了表达、沟通和被看见的意义。</p>
+                        </div>
+                        <div class="tag-grid">
+                          <span class="tag">贵州长顺</span>
+                          <span class="tag">西部计划</span>
+                          <span class="tag">课堂与陪伴</span>
+                        </div>
+                        <div class="media-slot-grid media-slot-grid--support">
+                          <div class="media-slot support-photo-slot has-image" style="--slot-position: center 26%;">
+                            <img class="slot-image" src="支教生活1.jpg" alt="支教日常 01" loading="lazy">
+                            <span class="media-slot-label">支教日常 01</span>
+                            <span class="media-slot-note">图片 / 链接预留</span>
+                          </div>
+                          <div class="media-slot support-photo-slot has-image" style="--slot-position: center 42%;">
+                            <img class="slot-image" src="支教生活2.JPG" alt="支教日常 02" loading="lazy">
+                            <span class="media-slot-label">支教日常 02</span>
+                            <span class="media-slot-note">图片 / 链接预留</span>
+                          </div>
+                          <div class="media-slot support-photo-slot has-image" style="--slot-position: center 48%;">
+                            <img class="slot-image" src="支教生活3.JPG" alt="支教日常 03" loading="lazy">
+                            <span class="media-slot-label">支教日常 03</span>
+                            <span class="media-slot-note">图片 / 链接预留</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="life-slide">
+                    <div class="projects-showcase-card life-showcase-card">
+                      <div class="projects-showcase-head">
+                        <div>
+                          <div class="projects-showcase-kicker">02 / 03</div>
+                          <h3>摄影日常</h3>
+                          <p>我喜欢用镜头把人物、光线和生活里转瞬即逝的氛围留住，让情绪和现场感继续被保存。</p>
+                        </div>
+                      </div>
+                      <div class="life-card">
+                        <p class="card-text">我喜欢记录人物、街角和光线在一天里变化的样子。很多照片未必是“作品”，但它们会帮我留住当时的氛围、关系和心情，也让我继续练习观察细节。</p>
+                        <div class="tag-grid">
+                          <span class="tag">人物</span>
+                          <span class="tag">生活切片</span>
+                          <span class="tag">光线观察</span>
+                        </div>
+                        <div class="media-slot-grid media-slot-grid--photo">
+                          <div class="media-slot photography-photo-slot has-image" style="--slot-position: center 26%;">
+                            <img class="slot-image" src="摄影作品1.jpg" alt="摄影记录 01" loading="lazy">
+                            <span class="media-slot-label">摄影记录 01</span>
+                            <span class="media-slot-note">图片预留</span>
+                          </div>
+                          <div class="media-slot photography-photo-slot has-image" style="--slot-position: center 38%;">
+                            <img class="slot-image" src="摄影作品2.jpg" alt="摄影记录 02" loading="lazy">
+                            <span class="media-slot-label">摄影记录 02</span>
+                            <span class="media-slot-note">图片预留</span>
+                          </div>
+                          <div class="media-slot photography-photo-slot has-image" style="--slot-position: center 22%;">
+                            <img class="slot-image" src="摄影作品3.jpg" alt="摄影记录 03" loading="lazy">
+                            <span class="media-slot-label">摄影记录 03</span>
+                            <span class="media-slot-note">图片预留</span>
+                          </div>
+                          <div class="media-slot photography-photo-slot has-image" style="--slot-position: center 24%;">
+                            <img class="slot-image" src="摄影作品4.jpg" alt="摄影记录 04" loading="lazy">
+                            <span class="media-slot-label">摄影记录 04</span>
+                            <span class="media-slot-note">图片预留</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="life-slide">
+                    <div class="projects-showcase-card life-showcase-card">
+                      <div class="projects-showcase-head">
+                        <div>
+                          <div class="projects-showcase-kicker">03 / 03</div>
+                          <h3>我的溜达日记</h3>
+                          <p>把去过的城市整理成一条会继续延长的路线，也预留照片位置记录每次出发时的天气和心情。</p>
+                        </div>
+                      </div>
+                      <div class="life-card">
+                        <p class="card-text">旅行对我来说更像一种慢慢靠近城市的方式。比起打卡，我更喜欢记住当时的天气、街道、食物和同行的人，所以想把去过的地方整理成一条还会继续延长的时间轴。</p>
+                        <ol class="travel-timeline travel-timeline-horizontal">
+                          <li class="travel-timeline-item">
+                            <div class="travel-photo-slot has-image" style="--slot-position: center 28%;">
+                              <img class="slot-image" src="洛阳.jpg" alt="洛阳旅行照片" loading="lazy">
+                            </div>
+                            <div class="travel-entry">
+                              <span class="travel-order">第 01 站</span>
+                              <strong>洛阳</strong>
+                            </div>
+                          </li>
+                          <li class="travel-timeline-item">
+                            <div class="travel-photo-slot has-image" style="--slot-position: center 42%;">
+                              <img class="slot-image" src="贵阳.jpg" alt="贵阳旅行照片" loading="lazy">
+                            </div>
+                            <div class="travel-entry">
+                              <span class="travel-order">第 02 站</span>
+                              <strong>贵阳</strong>
+                            </div>
+                          </li>
+                          <li class="travel-timeline-item">
+                            <div class="travel-photo-slot has-image" style="--slot-position: center 72%;">
+                              <img class="slot-image" src="杭州.jpg" alt="杭州旅行照片" loading="lazy">
+                            </div>
+                            <div class="travel-entry">
+                              <span class="travel-order">第 03 站</span>
+                              <strong>杭州</strong>
+                            </div>
+                          </li>
+                          <li class="travel-timeline-item">
+                            <div class="travel-photo-slot has-image" style="--slot-position: center 40%;">
+                              <img class="slot-image" src="苏州.jpg" alt="苏州旅行照片" loading="lazy">
+                            </div>
+                            <div class="travel-entry">
+                              <span class="travel-order">第 04 站</span>
+                              <strong>苏州</strong>
+                            </div>
+                          </li>
+                          <li class="travel-timeline-item">
+                            <div class="travel-photo-slot has-image" style="--slot-position: center 58%;">
+                              <img class="slot-image" src="南京.jpg" alt="南京旅行照片" loading="lazy">
+                            </div>
+                            <div class="travel-entry">
+                              <span class="travel-order">第 05 站</span>
+                              <strong>南京</strong>
+                            </div>
+                          </li>
+                          <li class="travel-timeline-item">
+                            <div class="travel-photo-slot has-image" style="--slot-position: center 52%;">
+                              <img class="slot-image" src="乌兰布统.jpg" alt="乌兰布统旅行照片" loading="lazy">
+                            </div>
+                            <div class="travel-entry">
+                              <span class="travel-order">第 06 站</span>
+                              <strong>乌兰布统</strong>
+                            </div>
+                          </li>
+                          <li class="travel-timeline-item">
+                            <div class="travel-photo-slot has-image" style="--slot-position: 62% 42%;">
+                              <img class="slot-image" src="天津.jpg" alt="天津旅行照片" loading="lazy">
+                            </div>
+                            <div class="travel-entry">
+                              <span class="travel-order">第 07 站</span>
+                              <strong>天津</strong>
+                            </div>
+                          </li>
+                          <li class="travel-timeline-item">
+                            <div class="travel-photo-slot has-image" style="--slot-position: center 40%;">
+                              <img class="slot-image" src="海口.jpg" alt="海口旅行照片" loading="lazy">
+                            </div>
+                            <div class="travel-entry">
+                              <span class="travel-order">第 08 站</span>
+                              <strong>海口</strong>
+                            </div>
+                          </li>
+                          <li class="travel-timeline-item">
+                            <div class="travel-photo-slot has-image" style="--slot-position: 64% 54%;">
+                              <img class="slot-image" src="湖南.jpg" alt="长沙旅行照片" loading="lazy">
+                            </div>
+                            <div class="travel-entry">
+                              <span class="travel-order">第 09 站</span>
+                              <strong>长沙</strong>
+                            </div>
+                          </li>
+                          <li class="travel-timeline-item">
+                            <div class="travel-photo-slot has-image" style="--slot-position: center 42%;">
+                              <img class="slot-image" src="重庆.jpg" alt="重庆旅行照片" loading="lazy">
+                            </div>
+                            <div class="travel-entry">
+                              <span class="travel-order">第 10 站</span>
+                              <strong>重庆</strong>
+                            </div>
+                          </li>
+                        </ol>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+              <div class="projects-carousel-footer">
+                <button class="projects-carousel-button prev" id="lifePrev" type="button" aria-label="查看上一张生活与爱好卡片">‹</button>
+                <div class="projects-indicators" aria-label="生活与爱好轮播指示器">
+                  <button class="projects-indicator active" type="button" data-life-index="0" aria-label="查看生活与爱好第 1 屏" aria-current="true"></button>
+                  <button class="projects-indicator" type="button" data-life-index="1" aria-label="查看生活与爱好第 2 屏" aria-current="false"></button>
+                  <button class="projects-indicator" type="button" data-life-index="2" aria-label="查看生活与爱好第 3 屏" aria-current="false"></button>
+                </div>
+                <button class="projects-carousel-button next" id="lifeNext" type="button" aria-label="查看下一张生活与爱好卡片">›</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
   <script>
-    const heroSection = document.getElementById("home");
+    const homeScrollContainer = document.getElementById("homeScrollContainer");
+    const homeSection = document.getElementById("home");
     const heroBg = document.getElementById("heroBg");
-    const showcaseWindow = document.getElementById("showcaseWindow");
-    const slides = Array.from(document.querySelectorAll(".home-slide"));
-    const slideDots = Array.from(document.querySelectorAll("#slideDots span"));
     const navLinks = Array.from(document.querySelectorAll(".nav-link"));
-    const pageSections = Array.from(document.querySelectorAll("section[id]"));
+    const pageSections = Array.from(document.querySelectorAll(".home-slide[id]"));
     const revealNodes = Array.from(document.querySelectorAll("[data-reveal]"));
     const avatarFrame = document.getElementById("avatarFrame");
     const avatarImage = document.getElementById("avatarImage");
+    const experienceCarousel = document.getElementById("experienceCarousel");
+    const experienceSlides = experienceCarousel ? Array.from(experienceCarousel.querySelectorAll(".experience-slide")) : [];
+    const experienceIndicators = Array.from(document.querySelectorAll("#experience .projects-indicator"));
+    const experiencePrevButton = document.getElementById("experiencePrev");
+    const experienceNextButton = document.getElementById("experienceNext");
+    const projectsCarousel = document.getElementById("projectsCarousel");
+    const projectSlides = projectsCarousel ? Array.from(projectsCarousel.querySelectorAll(".projects-slide")) : [];
+    const projectIndicators = Array.from(document.querySelectorAll("#projects .projects-indicator"));
+    const projectsPrevButton = document.getElementById("projectsPrev");
+    const projectsNextButton = document.getElementById("projectsNext");
+    const lifeCarousel = document.getElementById("lifeCarousel");
+    const lifeSlides = lifeCarousel ? Array.from(lifeCarousel.querySelectorAll(".life-slide")) : [];
+    const lifeIndicators = Array.from(document.querySelectorAll("#life .projects-indicator"));
+    const lifePrevButton = document.getElementById("lifePrev");
+    const lifeNextButton = document.getElementById("lifeNext");
+    const rootStyle = document.documentElement.style;
+    const heroGradient = "linear-gradient(180deg, rgba(249, 250, 244, 0.50), rgba(249, 250, 244, 0.64) 34%, rgba(239, 243, 236, 0.78) 76%, rgba(244, 246, 241, 0.92) 100%)";
 
     function createHeroPlaceholder() {
       const svg = `
@@ -996,44 +3052,337 @@
       return `url("data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}")`;
     }
 
-    function applyHeroPlaceholder() {
-      heroBg.style.setProperty("--hero-image", createHeroPlaceholder());
-      heroBg.style.backgroundImage = `linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.06) 34%, rgba(255, 255, 255, 0.10) 78%, rgba(255, 255, 255, 0.18) 100%), ${createHeroPlaceholder()}`;
+    function applyHeroBackground(source) {
+      rootStyle.setProperty("--hero-image", source);
+      heroBg.style.backgroundImage = `${heroGradient}, ${source}`;
     }
 
-    function setSlide(index) {
-      slides.forEach((slide, slideIndex) => {
-        slide.classList.toggle("active", slideIndex === index);
-      });
+    function scrollToSlide(targetId) {
+      const target = document.getElementById(targetId);
 
-      slideDots.forEach((dot, dotIndex) => {
-        dot.classList.toggle("active", dotIndex === index);
+      if (!target) {
+        return;
+      }
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest"
       });
     }
 
-    function updateHeroShowcase() {
-      const heroTop = heroSection.offsetTop;
-      const totalScrollable = Math.max(heroSection.offsetHeight - window.innerHeight, 1);
-      const progress = Math.min(Math.max((window.scrollY - heroTop) / totalScrollable, 0), 1);
-      const slideIndex = progress < 0.34 ? 0 : progress < 0.67 ? 1 : 2;
-
-      setSlide(slideIndex);
-      heroBg.style.setProperty("--hero-shift", `${progress * 36}px`);
-      showcaseWindow.style.transform = `translate(-50%, ${progress * 18}px)`;
+    function updateHeroParallax() {
+      const scrollRange = Math.max(window.innerHeight, 1);
+      const sectionTop = homeSection ? homeSection.getBoundingClientRect().top : 0;
+      const progress = Math.min(Math.max(-sectionTop / scrollRange, 0), 1);
+      heroBg.style.setProperty("--hero-shift", `${progress * -28}px`);
     }
 
     function updateActiveNav() {
-      const checkpoint = window.scrollY + 140;
-      let currentId = "home";
+      const viewportCenter = window.scrollY + window.innerHeight / 2;
+      let currentId = pageSections[0] ? pageSections[0].id : "home";
 
       pageSections.forEach((section) => {
-        if (checkpoint >= section.offsetTop) {
+        const sectionStart = section.offsetTop;
+        const sectionEnd = sectionStart + section.offsetHeight;
+
+        if (viewportCenter >= sectionStart && viewportCenter < sectionEnd) {
           currentId = section.id;
         }
       });
 
       navLinks.forEach((link) => {
         link.classList.toggle("active", link.getAttribute("href") === `#${currentId}`);
+      });
+    }
+
+    function normalizeWheelDelta(delta, deltaMode) {
+      if (deltaMode === 1) {
+        return delta * 18;
+      }
+
+      if (deltaMode === 2) {
+        return delta * window.innerWidth;
+      }
+
+      return delta;
+    }
+
+    function canScrollVertically(element, deltaY) {
+      if (!element || element.scrollHeight <= element.clientHeight + 1) {
+        return false;
+      }
+
+      if (deltaY < 0) {
+        return element.scrollTop > 0;
+      }
+
+      if (deltaY > 0) {
+        return element.scrollTop + element.clientHeight < element.scrollHeight - 1;
+      }
+
+      return false;
+    }
+
+    function canScrollHorizontally(element, deltaX) {
+      if (!element || element.scrollWidth <= element.clientWidth + 1) {
+        return false;
+      }
+
+      if (deltaX < 0) {
+        return element.scrollLeft > 0;
+      }
+
+      if (deltaX > 0) {
+        return element.scrollLeft + element.clientWidth < element.scrollWidth - 1;
+      }
+
+      return false;
+    }
+
+    function getExperienceSlideIndex() {
+      if (!experienceCarousel || !experienceSlides.length || !experienceCarousel.clientWidth) {
+        return 0;
+      }
+
+      return Math.max(0, Math.min(experienceSlides.length - 1, Math.round(experienceCarousel.scrollLeft / experienceCarousel.clientWidth)));
+    }
+
+    function scrollToExperienceSlide(index) {
+      if (!experienceCarousel || !experienceSlides.length) {
+        return;
+      }
+
+      const clampedIndex = Math.max(0, Math.min(experienceSlides.length - 1, index));
+      experienceCarousel.scrollTo({
+        left: experienceSlides[clampedIndex].offsetLeft,
+        behavior: "smooth"
+      });
+    }
+
+    function updateExperienceCarousel() {
+      if (!experienceCarousel || !experienceSlides.length) {
+        return;
+      }
+
+      const activeIndex = getExperienceSlideIndex();
+
+      experienceIndicators.forEach((indicator, index) => {
+        const isActive = index === activeIndex;
+        indicator.classList.toggle("active", isActive);
+        indicator.setAttribute("aria-current", isActive ? "true" : "false");
+      });
+
+      if (experiencePrevButton) {
+        experiencePrevButton.disabled = activeIndex === 0;
+      }
+
+      if (experienceNextButton) {
+        experienceNextButton.disabled = activeIndex === experienceSlides.length - 1;
+      }
+    }
+
+    function bindExperienceCarousel() {
+      if (!experienceCarousel || !experienceSlides.length) {
+        return;
+      }
+
+      if (experiencePrevButton) {
+        experiencePrevButton.addEventListener("click", () => {
+          scrollToExperienceSlide(getExperienceSlideIndex() - 1);
+        });
+      }
+
+      if (experienceNextButton) {
+        experienceNextButton.addEventListener("click", () => {
+          scrollToExperienceSlide(getExperienceSlideIndex() + 1);
+        });
+      }
+
+      experienceIndicators.forEach((indicator) => {
+        indicator.addEventListener("click", () => {
+          scrollToExperienceSlide(Number(indicator.dataset.experienceIndex || "0"));
+        });
+      });
+
+      experienceCarousel.addEventListener("scroll", updateExperienceCarousel, { passive: true });
+      updateExperienceCarousel();
+    }
+
+    function getProjectSlideIndex() {
+      if (!projectsCarousel || !projectSlides.length || !projectsCarousel.clientWidth) {
+        return 0;
+      }
+
+      return Math.max(0, Math.min(projectSlides.length - 1, Math.round(projectsCarousel.scrollLeft / projectsCarousel.clientWidth)));
+    }
+
+    function scrollToProjectSlide(index) {
+      if (!projectsCarousel || !projectSlides.length) {
+        return;
+      }
+
+      const clampedIndex = Math.max(0, Math.min(projectSlides.length - 1, index));
+      projectsCarousel.scrollTo({
+        left: projectSlides[clampedIndex].offsetLeft,
+        behavior: "smooth"
+      });
+    }
+
+    function updateProjectsCarousel() {
+      if (!projectsCarousel || !projectSlides.length) {
+        return;
+      }
+
+      const activeIndex = getProjectSlideIndex();
+
+      projectIndicators.forEach((indicator, index) => {
+        const isActive = index === activeIndex;
+        indicator.classList.toggle("active", isActive);
+        indicator.setAttribute("aria-current", isActive ? "true" : "false");
+      });
+
+      if (projectsPrevButton) {
+        projectsPrevButton.disabled = activeIndex === 0;
+      }
+
+      if (projectsNextButton) {
+        projectsNextButton.disabled = activeIndex === projectSlides.length - 1;
+      }
+    }
+
+    function bindProjectsCarousel() {
+      if (!projectsCarousel || !projectSlides.length) {
+        return;
+      }
+
+      if (projectsPrevButton) {
+        projectsPrevButton.addEventListener("click", () => {
+          scrollToProjectSlide(getProjectSlideIndex() - 1);
+        });
+      }
+
+      if (projectsNextButton) {
+        projectsNextButton.addEventListener("click", () => {
+          scrollToProjectSlide(getProjectSlideIndex() + 1);
+        });
+      }
+
+      projectIndicators.forEach((indicator) => {
+        indicator.addEventListener("click", () => {
+          scrollToProjectSlide(Number(indicator.dataset.projectIndex || "0"));
+        });
+      });
+
+      projectsCarousel.addEventListener("scroll", updateProjectsCarousel, { passive: true });
+      updateProjectsCarousel();
+    }
+
+    function getLifeSlideIndex() {
+      if (!lifeCarousel || !lifeSlides.length || !lifeCarousel.clientWidth) {
+        return 0;
+      }
+
+      return Math.max(0, Math.min(lifeSlides.length - 1, Math.round(lifeCarousel.scrollLeft / lifeCarousel.clientWidth)));
+    }
+
+    function scrollToLifeSlide(index) {
+      if (!lifeCarousel || !lifeSlides.length) {
+        return;
+      }
+
+      const clampedIndex = Math.max(0, Math.min(lifeSlides.length - 1, index));
+      lifeCarousel.scrollTo({
+        left: lifeSlides[clampedIndex].offsetLeft,
+        behavior: "smooth"
+      });
+    }
+
+    function updateLifeCarousel() {
+      if (!lifeCarousel || !lifeSlides.length) {
+        return;
+      }
+
+      const activeIndex = getLifeSlideIndex();
+
+      lifeIndicators.forEach((indicator, index) => {
+        const isActive = index === activeIndex;
+        indicator.classList.toggle("active", isActive);
+        indicator.setAttribute("aria-current", isActive ? "true" : "false");
+      });
+
+      if (lifePrevButton) {
+        lifePrevButton.disabled = activeIndex === 0;
+      }
+
+      if (lifeNextButton) {
+        lifeNextButton.disabled = activeIndex === lifeSlides.length - 1;
+      }
+    }
+
+    function bindLifeCarousel() {
+      if (!lifeCarousel || !lifeSlides.length) {
+        return;
+      }
+
+      if (lifePrevButton) {
+        lifePrevButton.addEventListener("click", () => {
+          scrollToLifeSlide(getLifeSlideIndex() - 1);
+        });
+      }
+
+      if (lifeNextButton) {
+        lifeNextButton.addEventListener("click", () => {
+          scrollToLifeSlide(getLifeSlideIndex() + 1);
+        });
+      }
+
+      lifeIndicators.forEach((indicator) => {
+        indicator.addEventListener("click", () => {
+          scrollToLifeSlide(Number(indicator.dataset.lifeIndex || "0"));
+        });
+      });
+
+      lifeCarousel.addEventListener("scroll", updateLifeCarousel, { passive: true });
+      updateLifeCarousel();
+    }
+
+    function handleWheel(event) {
+      if (event.ctrlKey) {
+        return;
+      }
+
+      const horizontalCarousel = event.target.closest(".projects-carousel-track, .travel-timeline-horizontal");
+      const horizontalDelta = event.deltaX || (event.shiftKey ? event.deltaY : 0);
+
+      if (horizontalCarousel && horizontalDelta && canScrollHorizontally(horizontalCarousel, horizontalDelta)) {
+        if (!event.deltaX && event.shiftKey) {
+          event.preventDefault();
+          horizontalCarousel.scrollLeft += normalizeWheelDelta(horizontalDelta, event.deltaMode);
+        }
+        return;
+      }
+
+      if (horizontalCarousel && !event.deltaX && !event.shiftKey && canScrollHorizontally(horizontalCarousel, event.deltaY)) {
+        event.preventDefault();
+        horizontalCarousel.scrollLeft += normalizeWheelDelta(event.deltaY, event.deltaMode);
+        return;
+      }
+
+      const scrollableAncestor = event.target.closest(".section-scroll-body, .home-scroll-body");
+
+      if (scrollableAncestor && canScrollVertically(scrollableAncestor, event.deltaY)) {
+        return;
+      }
+    }
+
+    function bindSlideLinks(links) {
+      links.forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          const targetId = link.getAttribute("href").replace("#", "");
+          scrollToSlide(targetId);
+        });
       });
     }
 
@@ -1054,7 +3403,8 @@
           });
         },
         {
-          threshold: 0.16
+          root: null,
+          threshold: 0.2
         }
       );
 
@@ -1063,8 +3413,7 @@
       });
     }
 
-    /* 头像优先级探测：按 png -> jpg -> jpeg 顺序依次尝试。 */
-    function probeAvatarSource(sources, onSuccess, onFailure) {
+    function probeAssetSource(sources, onSuccess, onFailure) {
       let currentIndex = 0;
 
       function tryNext() {
@@ -1091,10 +3440,25 @@
       tryNext();
     }
 
+    function loadHeroBackground() {
+      const backgroundCandidates = ["background.jpg"];
+
+      probeAssetSource(
+        backgroundCandidates,
+        (source) => {
+          applyHeroBackground(`url("${source}")`);
+        },
+        () => {
+          applyHeroBackground(createHeroPlaceholder());
+        }
+      );
+    }
+
+    /* 头像优先级探测：按 png -> jpg -> jpeg 顺序依次尝试。 */
     function loadAvatar() {
       const avatarCandidates = ["avatar.png", "avatar.jpg", "avatar.jpeg"];
 
-      probeAvatarSource(
+      probeAssetSource(
         avatarCandidates,
         (source) => {
           avatarImage.src = source;
@@ -1107,17 +3471,28 @@
     }
 
     function handleScroll() {
-      updateHeroShowcase();
+      updateHeroParallax();
       updateActiveNav();
     }
 
+    homeScrollContainer.addEventListener("wheel", handleWheel, { passive: false });
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll);
+    window.addEventListener("resize", updateExperienceCarousel);
+    window.addEventListener("resize", updateProjectsCarousel);
+    window.addEventListener("resize", updateLifeCarousel);
 
-    applyHeroPlaceholder();
+    loadHeroBackground();
     initReveal();
+    bindSlideLinks(navLinks);
+    bindExperienceCarousel();
+    bindProjectsCarousel();
+    bindLifeCarousel();
     loadAvatar();
     handleScroll();
+    updateExperienceCarousel();
+    updateProjectsCarousel();
+    updateLifeCarousel();
   </script>
 </body>
 </html>
