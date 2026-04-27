@@ -1107,6 +1107,12 @@ assert.match(
 
 assert.match(
   html,
+  /function schedulePagedCarouselRelease\(carousel\)/,
+  "缺少分页轮播的手势释放逻辑"
+);
+
+assert.match(
+  html,
   /homeScrollContainer\.addEventListener\("wheel", handleWheel, \{ passive: false \}\);/,
   "缺少滚轮事件绑定"
 );
@@ -1142,8 +1148,20 @@ assert.match(
 
 assert.match(
   html,
-  /state\.accumulatedDeltaX \+= deltaX;[\s\S]*state\.accumulatedDeltaY \+= deltaY;[\s\S]*verticalMagnitude > horizontalMagnitude \* 1\.4[\s\S]*state\.hasTriggered \|\| horizontalMagnitude < pagedCarouselSwipeThreshold[\s\S]*state\.hasTriggered = true;/,
-  "缺少单次手势只切换一页的横向轮播锁定逻辑"
+  /state\.accumulatedDeltaX \+= deltaX;[\s\S]*state\.accumulatedDeltaY \+= deltaY;[\s\S]*schedulePagedCarouselRelease\(carousel\);[\s\S]*verticalMagnitude > horizontalMagnitude \* 1\.4[\s\S]*state\.hasTriggered \|\| horizontalMagnitude < pagedCarouselSwipeThreshold/,
+  "缺少按正常手势流程解锁并单次切换一页的轮播逻辑"
+);
+
+assert.match(
+  html,
+  /if \(targetIndex === currentIndex\) \{[\s\S]*state\.targetIndex = currentIndex;[\s\S]*return;/,
+  "分页轮播缺少边界场景的目标页记录逻辑"
+);
+
+assert.match(
+  html,
+  /state\.hasTriggered = true;[\s\S]*state\.targetIndex = targetIndex;/,
+  "分页轮播缺少目标页记录与单次手势锁定逻辑"
 );
 
 assert.ok(
@@ -1159,6 +1177,12 @@ assert.ok(
 assert.ok(
   !/markPagedCarouselProgrammaticScroll\(/.test(html),
   "分页轮播仍保留程序化滚动保护逻辑"
+);
+
+assert.match(
+  html,
+  /state\.targetIndex === null \|\| controller\.getIndex\(\) === state\.targetIndex[\s\S]*state\.hasTriggered = false;[\s\S]*state\.targetIndex = null;/,
+  "分页轮播缺少到达目标页后自动解锁的逻辑"
 );
 
 assert.ok(

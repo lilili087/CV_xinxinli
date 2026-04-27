@@ -3302,7 +3302,7 @@
     const heroGradient = "linear-gradient(180deg, rgba(249, 250, 244, 0.50), rgba(249, 250, 244, 0.64) 34%, rgba(239, 243, 236, 0.78) 76%, rgba(244, 246, 241, 0.92) 100%)";
     const pagedCarouselGestureState = new WeakMap();
     const pagedCarouselSwipeThreshold = 20;
-    const pagedCarouselGestureResetMs = 520;
+    const pagedCarouselGestureResetMs = 180;
 
     function createHeroPlaceholder() {
       const svg = `
@@ -3502,11 +3502,44 @@
         accumulatedDeltaX: 0,
         accumulatedDeltaY: 0,
         hasTriggered: false,
+        targetIndex: null,
         releaseTimer: null
       };
 
       pagedCarouselGestureState.set(carousel, nextState);
       return nextState;
+    }
+
+    function schedulePagedCarouselRelease(carousel) {
+      const controller = getPagedCarouselController(carousel);
+      const state = getPagedCarouselState(carousel);
+
+      if (state.releaseTimer) {
+        window.clearTimeout(state.releaseTimer);
+      }
+
+      state.releaseTimer = window.setTimeout(() => {
+        state.releaseTimer = null;
+
+        if (!state.hasTriggered || !controller) {
+          state.accumulatedDeltaX = 0;
+          state.accumulatedDeltaY = 0;
+          state.targetIndex = null;
+          return;
+        }
+
+        const targetReached = state.targetIndex === null || controller.getIndex() === state.targetIndex;
+
+        if (!targetReached) {
+          schedulePagedCarouselRelease(carousel);
+          return;
+        }
+
+        state.accumulatedDeltaX = 0;
+        state.accumulatedDeltaY = 0;
+        state.hasTriggered = false;
+        state.targetIndex = null;
+      }, pagedCarouselGestureResetMs);
     }
 
     function queuePagedCarouselSwipe(carousel, deltaX, deltaY) {
@@ -3520,17 +3553,7 @@
 
       state.accumulatedDeltaX += deltaX;
       state.accumulatedDeltaY += deltaY;
-
-      if (state.releaseTimer) {
-        window.clearTimeout(state.releaseTimer);
-      }
-
-      state.releaseTimer = window.setTimeout(() => {
-        state.accumulatedDeltaX = 0;
-        state.accumulatedDeltaY = 0;
-        state.hasTriggered = false;
-        state.releaseTimer = null;
-      }, pagedCarouselGestureResetMs);
+      schedulePagedCarouselRelease(carousel);
 
       const horizontalMagnitude = Math.abs(state.accumulatedDeltaX);
       const verticalMagnitude = Math.abs(state.accumulatedDeltaY);
@@ -3554,7 +3577,7 @@
       if (targetIndex === currentIndex) {
         state.accumulatedDeltaX = 0;
         state.accumulatedDeltaY = 0;
-        state.hasTriggered = true;
+        state.targetIndex = currentIndex;
         pagedCarouselGestureState.set(carousel, state);
         return;
       }
@@ -3562,6 +3585,7 @@
       state.accumulatedDeltaX = 0;
       state.accumulatedDeltaY = 0;
       state.hasTriggered = true;
+      state.targetIndex = targetIndex;
       pagedCarouselGestureState.set(carousel, state);
 
       controller.scrollToIndex(targetIndex);
